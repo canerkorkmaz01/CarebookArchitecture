@@ -1,4 +1,4 @@
-﻿using Carebook.ENTITIES.Interfaces;
+﻿using Carebook.ENTITIES.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -9,11 +9,12 @@ using System.Threading.Tasks;
 
 namespace Carebook.DAL.Configurations
 {
-    public abstract class BaseConfiguration<T> : IEntityTypeConfiguration<T> where T : class, IEntity
+    public class PricingConfiguration : BaseConfiguration<Pricing>
     {
-        public virtual void Configure(EntityTypeBuilder<T> builder)
+        public virtual void Configuration(EntityTypeBuilder<Pricing> builder) 
         {
-          
+
+
         }
     }
 }

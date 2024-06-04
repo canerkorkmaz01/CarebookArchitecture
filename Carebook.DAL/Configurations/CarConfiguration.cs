@@ -13,7 +13,7 @@ namespace Carebook.DAL.Configurations
     {
         public override void Configure(EntityTypeBuilder<Car> builder)
         {
-            base.Configure(builder);
+            //base.Configure(builder);
             builder
                .HasIndex(p => new { p.CarName })
                .IsUnique();

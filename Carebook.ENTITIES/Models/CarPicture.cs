@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Carebook.ENTITIES.Models
 {
-    public class CarPicture:BaseEntity
+    public class CarPicture:SortableBaseEntity
     {
         public int CarId { get; set; }
 

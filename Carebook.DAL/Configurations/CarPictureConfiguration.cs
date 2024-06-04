@@ -12,6 +12,7 @@ namespace Carebook.DAL.Configurations
     {
         public override void Configure(EntityTypeBuilder<CarPicture> builder)
         {
+            //base.Configure(builder);
             builder
                  .Property(p => p.Photo)
                  .IsUnicode(false);
