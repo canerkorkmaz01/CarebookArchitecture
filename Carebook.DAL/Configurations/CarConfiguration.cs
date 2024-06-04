@@ -99,11 +99,11 @@ namespace Carebook.DAL.Configurations
               .IsRequired()
               .HasPrecision(18, 0);
 
-            //builder
-            //  .HasMany(p => p.CarPictures)
-            //  .WithOne(p => p.Car)
-            //  .HasForeignKey(p => p.CarId)
-            //  .OnDelete(DeleteBehavior.Cascade);
+            builder
+              .HasMany(p => p.CarPictures)
+              .WithOne(p => p.Car)
+              .HasForeignKey(p => p.CarId)
+              .OnDelete(DeleteBehavior.Cascade);
 
         }
     }
