@@ -1,0 +1,8 @@
+﻿namespace Carebook.CoreUI.Areas.Admin.Models.AppUsers.RequestModels
+{
+    public class CreateUserRequestModel
+    {
+        public string? UserName { get; set; }
+        public string? Email { get; set; }
+    }
+}
