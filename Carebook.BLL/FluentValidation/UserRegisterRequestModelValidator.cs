@@ -1,7 +1,7 @@
 ﻿using Carebook.CoreUI.ViewModels.AppUsers.RequestModels;
 using FluentValidation;
 
-namespace Carebook.CoreUI.FluentValidation.FluentValidation
+namespace Carebook.BLL.FluentValidation
 {
     public class UserRegisterRequestModelValidator : RegisterSignInSharedValidator<UserRegisterRequestModel>
     {

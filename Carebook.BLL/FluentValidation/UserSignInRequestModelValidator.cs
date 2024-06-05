@@ -1,4 +1,4 @@
-﻿namespace Carebook.CoreUI.FluentValidation.FluentValidation
+﻿namespace Carebook.BLL.FluentValidation
 {
     public class UserSignInRequestModelValidator
     {

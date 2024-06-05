@@ -2,9 +2,9 @@
 using FluentValidation;
 using System.Data;
 
-namespace Carebook.CoreUI.FluentValidation.FluentValidation
+namespace Carebook.BLL.FluentValidation
 {
-    public class RegisterSignInSharedValidator<T> :AbstractValidator<T> where T : IRegisterSignlnSpec
+    public class RegisterSignInSharedValidator<T> : AbstractValidator<T> where T : IRegisterSignlnSpec
     {
         public RegisterSignInSharedValidator()
         {
