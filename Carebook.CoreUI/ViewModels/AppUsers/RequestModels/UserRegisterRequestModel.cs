@@ -1,0 +1,8 @@
+﻿namespace Carebook.CoreUI.ViewModels.AppUsers.RequestModels
+{
+    public class UserRegisterRequestModel : IRegisterSignlnSpec
+    {
+        public string? UserName { get ; set ; }
+        public string? Password { get; set; }
+    }
+}
