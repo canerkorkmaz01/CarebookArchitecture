@@ -18,6 +18,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\AdminLTE-3.2.0\.github\codeql\codeql-config.yml" />
+    <None Include="Areas\Admin\AdminLTE-3.2.0\.github\CONTRIBUTING.md" />
+    <None Include="Areas\Admin\AdminLTE-3.2.0\.github\dependabot.yml" />
+    <None Include="Areas\Admin\AdminLTE-3.2.0\.github\ISSUE_TEMPLATE\bug-report-for-adminlte-v3.1-x.md" />
+    <None Include="Areas\Admin\AdminLTE-3.2.0\.github\ISSUE_TEMPLATE\feature-request-for-adminlte-v4-x.md" />
+    <None Include="Areas\Admin\AdminLTE-3.2.0\.github\workflows\ci.yml" />
+    <None Include="Areas\Admin\AdminLTE-3.2.0\.github\workflows\codeql.yml" />
+    <None Include="Areas\Admin\AdminLTE-3.2.0\.github\workflows\docs.yml" />
+    <None Include="Areas\Admin\AdminLTE-3.2.0\.github\workflows\lint.yml" />
     <None Include="wwwroot\css\.DS_Store" />
     <None Include="wwwroot\css\bootstrap\.DS_Store" />
     <None Include="wwwroot\css\css\.DS_Store" />
