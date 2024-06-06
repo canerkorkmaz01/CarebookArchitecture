@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Carebook.DAL.Repositories.Abstracts
 {
-    public interface IAppUserProfile:IRepository<AppUserProfile>
+    public interface IAppUserRoleRepository : IRepository<AppUserRole>
     {
     }
 }
