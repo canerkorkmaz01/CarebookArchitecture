@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Carebook.CoreUI\Carebook.CoreUI.csproj" />
+    <ProjectReference Include="..\Carebook.DAL\Carebook.DAL.csproj" />
   </ItemGroup>
 
 </Project>
