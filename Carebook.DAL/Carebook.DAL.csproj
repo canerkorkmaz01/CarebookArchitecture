@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Carebook.ENTITIES\Carebook.ENTITIES.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\Concretes\" />
+  </ItemGroup>
+
 </Project>

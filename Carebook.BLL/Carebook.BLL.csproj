@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Carebook.DAL\Carebook.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ManagerService\Abstracts\" />
+  </ItemGroup>
+
 </Project>
