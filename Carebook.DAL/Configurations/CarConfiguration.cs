@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -104,6 +105,11 @@ namespace Carebook.DAL.Configurations
               .WithOne(p => p.Car)
               .HasForeignKey(p => p.CarId)
               .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Ignore(x => x.PicturesToDeleted);
+            builder.Ignore(x => x.SelectedFeatures);
+            builder.Ignore(x => x.PhotoFiles);
+
 
         }
     }
