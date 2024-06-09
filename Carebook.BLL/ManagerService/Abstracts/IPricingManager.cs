@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Carebook.DAL.Repositories.Abstracts
+namespace Carebook.BLL.ManagerService.Abstracts
 {
-    public interface IAppUserRepository:IRepository<AppUser>
+    public interface IPricingManager : IManager<Pricing>
     {
-        Task<bool> AddUser(AppUser item);
     }
 }

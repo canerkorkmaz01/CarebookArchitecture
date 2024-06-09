@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Carebook.DAL.Repositories.Abstracts
+namespace Carebook.BLL.ManagerService.Abstracts
 {
-    public interface IAppUserRepository:IRepository<AppUser>
+    public interface IAppUserManager : IManager<AppUser>
     {
-        Task<bool> AddUser(AppUser item);
+        Task<bool> CreateUserAsync(AppUser item);
     }
 }
