@@ -10,7 +10,7 @@ namespace Carebook.ENTITIES.Models
 {
     public class Pricing:BaseEntity
     {
-        [Display(Name = "Araç Adı")]
+        //[Display(Name = "Araç Adı")]
         public int CarId { get; set; }
         public decimal HourlyRate { get; set; }
         public decimal DailyWages { get; set; }

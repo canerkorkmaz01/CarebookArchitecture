@@ -10,8 +10,8 @@ namespace Carebook.ENTITIES.Models
 {
     public class Feature:BaseEntity
     {
-        [Display(Name = "Kategori Adı")]
-        [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
+        //[Display(Name = "Kategori Adı")]
+        //[Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public string Name { get; set; }
 
         public virtual ICollection<Car> Cars { get; set; } = new HashSet<Car>();

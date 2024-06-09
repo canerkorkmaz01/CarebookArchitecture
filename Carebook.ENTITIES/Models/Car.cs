@@ -14,44 +14,44 @@ namespace Carebook.ENTITIES.Models
 {
     public class Car:BaseEntity
     {
-        [Display(Name = "Araç Adı")]
-        [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
+        //[Display(Name = "Araç Adı")]
+        //[Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public string CarName { get; set; }
 
-        [Display(Name = "Yılı")]
-        [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
+        //[Display(Name = "Yılı")]
+        //[Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public int Year { get; set; }
 
-        [Display(Name = "Kasa")]
-        [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
+        //[Display(Name = "Kasa")]
+        //[Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public Safe Safe { get; set; }
 
-        [Display(Name = "Yakıt Tipi")]
-        [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
+        //[Display(Name = "Yakıt Tipi")]
+        //[Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public FuelType FuelType { get; set; }
 
-        [Display(Name = "Vites Tipi")]
-        [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
+        //[Display(Name = "Vites Tipi")]
+        //[Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public GearType GearType { get; set; }
 
-        [Display(Name = "Kilometresi")]
-        [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
+        //[Display(Name = "Kilometresi")]
+        //[Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public decimal Kilometer { get; set; }
 
-        [Display(Name = "Koltuk Sayısı")]
-        [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
+        //[Display(Name = "Koltuk Sayısı")]
+        //[Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public int Armchair { get; set; }
 
-        [Display(Name = "Valiz Sayısı")]
-        [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
+        //[Display(Name = "Valiz Sayısı")]
+        //[Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public int SuitCase { get; set; }
 
-        [Display(Name = "Ehliyeti")]
-        [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
+        //[Display(Name = "Ehliyeti")]
+        //[Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public Licence Licence { get; set; }
 
-        [Display(Name = "Araç Plakası")]
-        [Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
+        //[Display(Name = "Araç Plakası")]
+        //[Required(ErrorMessage = "{0} alanı boş bırakılamaz")]
         public string Plate { get; set; }
 
         [NotMapped]
