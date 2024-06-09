@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace Carebook.BLL.ManagerService.Concretes
 {
-    public class AppRolManagere : BaseManager<AppRole>,IAppRoleManager
+    public class AppUserRoleManger : BaseManager<AppUserRole>,IAppUserRoleManager
     {
-        IAppRoleRepository _appRoleRepository;
-        public AppRolManagere(IAppRoleRepository appRoleRepository) : base(appRoleRepository)
+        IAppUserRoleRepository _appUserRoleRepository;
+        public AppUserRoleManger(IAppUserRoleRepository appUserRoleRepository) : base(appUserRoleRepository)
         {
-            _appRoleRepository = appRoleRepository;
+           _appUserRoleRepository = appUserRoleRepository;
         }
     }
 }

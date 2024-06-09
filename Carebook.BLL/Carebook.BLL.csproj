@@ -13,8 +13,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Carebook.CoreUI\Carebook.CoreUI.csproj" />
-    <ProjectReference Include="..\Carebook.DAL\Carebook.DAL.csproj" />
+	  <ProjectReference Include="..\Carebook.CoreUI\Carebook.CoreUI.csproj" />
+    <ProjectReference Include="..\Carebook.DAL\Carebook.DAL.csproj">
+	  <PrivateAssets>All</PrivateAssets>
+	</ProjectReference>
+	 
   </ItemGroup>
 
 </Project>
