@@ -6,6 +6,8 @@ using Carebook.DataAccess.Context;
 using Carebook.DataAccess.Interface;
 using Carebook.DataAccess.Repositories;
 using Carebook.DataAccess.UnitOfWork;
+using Carebook.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,9 +31,6 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddScoped<ICarService, CarService>();
 
-
-
-
 var app = builder.Build();
 
 
@@ -47,8 +46,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
+
+await DbInitializer.Initialize(app.Services, app.Configuration);
+
 
 app.MapControllerRoute(
     name: "default",
