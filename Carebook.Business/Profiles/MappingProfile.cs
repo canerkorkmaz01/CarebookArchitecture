@@ -11,7 +11,7 @@ namespace Carebook.Business.Profiles
         {
             CreateMap<Car, CarViewModel>().ReverseMap();
             CreateMap<User, RegisterViewModel>().ReverseMap();
-           
+            CreateMap<Feature, FeatureViewModel>().ReverseMap();
         }
     }
 }

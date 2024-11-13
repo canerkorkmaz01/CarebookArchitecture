@@ -1,4 +1,6 @@
-﻿using Carebook.Business.Interfaces;
+﻿using AutoMapper;
+using Carebook.Business.Interfaces;
+using Carebook.Common.ViewModels;
 using Carebook.DataAccess.Interface;
 using Carebook.Entities;
 using System.Linq.Expressions;
@@ -9,10 +11,12 @@ namespace Carebook.Business.Services
     {
 
         private readonly IRepository<Feature> _featureRepository;
+        private readonly IMapper _mapper;
 
-        public FeatureService(IRepository<Feature> featureRepository)
+        public FeatureService(IRepository<Feature> featureRepository, IMapper mapper)
         {
             _featureRepository = featureRepository;
+            _mapper = mapper;
         }
 
         public async Task AddAsync(Feature entity)
@@ -37,7 +41,8 @@ namespace Carebook.Business.Services
 
         public async Task<IEnumerable<Feature>> GetAllAsync(bool asNoTracking = true)
         {
-            return await _featureRepository.GetAllAsync(asNoTracking);
+            var feature = await _featureRepository.GetAllAsync(asNoTracking);
+            return (IEnumerable<Feature>)_mapper.Map<IEnumerable<FeatureViewModel>>(feature);
         }
 
         public async Task<Feature> GetByIdAsync(int id, bool asNoTracking = true)

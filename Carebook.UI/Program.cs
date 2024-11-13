@@ -30,6 +30,8 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddScoped<ICarFeatureRepository, CarFeatureRepository>();
+builder.Services.AddScoped<ICarFeatureService, CarFeatureService>();
 
 var app = builder.Build();
 

@@ -35,6 +35,8 @@ namespace Carebook.Common.ViewModels
 
         public byte[]? PhotoFiles { get; set; }
 
+        public virtual bool Enabled { get; set; }
+
 
         public virtual ICollection<CarPictureViewModel> CarPictures { get; set; } = new HashSet<CarPictureViewModel>();
         public virtual ICollection<FeatureViewModel> Features { get; set; } = new HashSet<FeatureViewModel>();
