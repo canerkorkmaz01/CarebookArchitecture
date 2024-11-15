@@ -2,6 +2,7 @@ using Carebook.Business.DependencyResolvers.Microsoft;
 using Carebook.Business.Interfaces;
 using Carebook.Business.Profiles;
 using Carebook.Business.Services;
+using Carebook.Common.ViewModels;
 using Carebook.DataAccess.Context;
 using Carebook.DataAccess.Interface;
 using Carebook.DataAccess.Repositories;
@@ -32,6 +33,9 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddScoped<ICarService, CarService>();
 builder.Services.AddScoped<ICarFeatureRepository, CarFeatureRepository>();
 builder.Services.AddScoped<ICarFeatureService, CarFeatureService>();
+builder.Services.AddScoped<ICarPageListRepository, CarPageListRepository>();
+builder.Services.AddScoped<ICarPageListService, CarPageListService>();
+builder.Services.AddScoped<IService<FeatureViewModel>, FeatureService>();
 
 var app = builder.Build();
 
@@ -53,15 +57,14 @@ app.UseAuthorization();
 
 await DbInitializer.Initialize(app.Services, app.Configuration);
 
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
 app.MapAreaControllerRoute(
     name: "admin",
     areaName: "Admin",
     pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 //app.MapAreaControllerRoute(
 //    name: "user",

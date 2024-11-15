@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.Features;
 using Carebook.Business.Interfaces;
 using Carebook.Common.ViewModels;
 using Carebook.DataAccess.Interface;
@@ -7,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace Carebook.Business.Services
 {
-    public class FeatureService : IService<Feature>
+    public class FeatureService : IService<FeatureViewModel>
     {
 
         private readonly IRepository<Feature> _featureRepository;
@@ -19,60 +20,71 @@ namespace Carebook.Business.Services
             _mapper = mapper;
         }
 
-        public async Task AddAsync(Feature entity)
+        public async Task AddAsync(FeatureViewModel entity)
         {
-            await _featureRepository.AddAsync(entity); 
+            var feature=_mapper.Map<Feature>(entity);
+            await _featureRepository.AddAsync(feature); 
         }
 
-        public async Task AddRangeAsync(IEnumerable<Feature> entities)
+        public async Task AddRangeAsync(IEnumerable<FeatureViewModel> entities)
         {
-           await _featureRepository.AddRangeAsync(entities);    
+            var feature = _mapper.Map<IEnumerable<Feature>>(entities);
+           await _featureRepository.AddRangeAsync(feature);    
         }
 
-        public async Task<int> CountAsync(Expression<Func<Feature, bool>> predicate = null)
+        public async Task<int> CountAsync(Expression<Func<FeatureViewModel, bool>> predicate = null)
         {
-            return await _featureRepository.CountAsync(predicate);
+            Expression<Func<Feature, bool>> feature =_mapper.Map<Expression<Func<FeatureViewModel, bool>>, Expression<Func<Feature, bool>>>(predicate);
+            return await _featureRepository.CountAsync(feature);
         }
 
-        public async Task<IEnumerable<Feature>> FindAsync(Expression<Func<Feature, bool>> predicate, bool asNoTracking = true)
+        public async Task<IEnumerable<FeatureViewModel>> FindAsync(Expression<Func<FeatureViewModel, bool>> predicate, bool asNoTracking = true)
         {
-            return await _featureRepository.FindAsync(predicate, asNoTracking);
+            Expression<Func<Feature,bool>> feature =_mapper.Map<Expression<Func<FeatureViewModel,bool>>, Expression<Func<Feature, bool>>>(predicate);
+           var features= await _featureRepository.FindAsync(feature, asNoTracking);
+            return _mapper.Map<IEnumerable<FeatureViewModel>>(features);
         }
 
-        public async Task<IEnumerable<Feature>> GetAllAsync(bool asNoTracking = true)
+        public async Task<IEnumerable<FeatureViewModel>> GetAllAsync(bool asNoTracking = true)
         {
             var feature = await _featureRepository.GetAllAsync(asNoTracking);
-            return (IEnumerable<Feature>)_mapper.Map<IEnumerable<FeatureViewModel>>(feature);
+            return (IEnumerable<FeatureViewModel>)_mapper.Map<IEnumerable<FeatureViewModel>>(feature);
         }
 
-        public async Task<Feature> GetByIdAsync(int id, bool asNoTracking = true)
+        public async Task<FeatureViewModel> GetByIdAsync(int id, bool asNoTracking = true)
         {
-            return await _featureRepository.GetByIdAsync(id, asNoTracking);
+            var features = await _featureRepository.GetByIdAsync(id, asNoTracking);
+            return _mapper.Map<FeatureViewModel>(features);
         }
 
-        public async Task<IEnumerable<Feature>> GetPagedResponseAsync(int pageNumber, int pageSize, bool asNoTracking = true)
+        public async Task<IEnumerable<FeatureViewModel>> GetPagedResponseAsync(int pageNumber, int pageSize, bool asNoTracking = true)
         {
-            return await _featureRepository.GetPagedResponseAsync(pageNumber, pageSize, asNoTracking);
+            var features = await _featureRepository.GetPagedResponseAsync(pageNumber, pageSize, asNoTracking);
+            return  _mapper.Map<IEnumerable<FeatureViewModel>>(features);  
         }
 
-        public IQueryable<Feature> GetQuery(bool asNoTracking = true)
+        public IQueryable<FeatureViewModel> GetQuery(bool asNoTracking = true)
         {
-           return _featureRepository.GetQuery(asNoTracking);
+            var features = _featureRepository.GetQuery(asNoTracking);
+            return _mapper.Map< IQueryable<FeatureViewModel>>(features);
         }
 
-        public void Remove(Feature entity)
+        public void Remove(FeatureViewModel entity)
         {
-            _featureRepository.Remove(entity);
+            var feature = _mapper.Map<Feature>(entity);
+            _featureRepository.Remove(feature);
         }
 
-        public void RemoveRange(IEnumerable<Feature> entities)
+        public void RemoveRange(IEnumerable<FeatureViewModel> entities)
         {
-           _featureRepository.RemoveRange(entities);
+            var features = _mapper.Map<IEnumerable<Feature>>(entities);
+           _featureRepository.RemoveRange(features);
         }
 
-        public void Update(Feature entity)
+        public void Update(FeatureViewModel entity)
         {
-           _featureRepository.Update(entity);
+            var features = _mapper.Map<Feature>(entity);
+           _featureRepository.Update(features);
         }
     }
 }

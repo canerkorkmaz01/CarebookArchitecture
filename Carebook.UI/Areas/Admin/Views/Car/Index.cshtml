@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="table-responsive " style="width:100%">
-            @if (User.IsInRole("Administrators"))
+            @if (User.IsInRole("Admin"))
             {
                 <a asp-controller="Car" asp-action="Create" class="btn btn-info mt-2 mb-2 "> <span class=" fas fa-plus"></span> Araç Ekle</a>
             }

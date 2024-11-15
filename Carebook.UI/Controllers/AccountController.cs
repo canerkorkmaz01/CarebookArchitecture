@@ -110,8 +110,6 @@ namespace Carebook.UI.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await _userService.LogoutAsync();

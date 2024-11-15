@@ -1,10 +1,11 @@
-﻿using Carebook.Common.ViewModels;
+﻿using Carebook.Business.Interfaces;
+using Carebook.Common.ViewModels;
 using Carebook.DataAccess.Interface;
 using PagedList;
 
 namespace Carebook.Business.Services
 {
-    public class CarPageListService : ICarPageListRepository
+    public class CarPageListService : ICarPageListService
     {
         private readonly ICarPageListRepository _carPageListRepository;
 
