@@ -3,6 +3,7 @@ using AutoMapper.Features;
 using Carebook.Business.Interfaces;
 using Carebook.Common.ViewModels;
 using Carebook.DataAccess.Interface;
+using Carebook.DataAccess.UnitOfWork;
 using Carebook.Entities;
 using System.Linq.Expressions;
 
@@ -13,17 +14,21 @@ namespace Carebook.Business.Services
 
         private readonly IRepository<Feature> _featureRepository;
         private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public FeatureService(IRepository<Feature> featureRepository, IMapper mapper)
+        public FeatureService(IRepository<Feature> featureRepository, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _featureRepository = featureRepository;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task AddAsync(FeatureViewModel entity)
         {
-            var feature=_mapper.Map<Feature>(entity);
-            await _featureRepository.AddAsync(feature); 
+            var feature = _mapper.Map<Feature>(entity);
+            var featureRepository =  _unitOfWork.Repository<Feature>();
+            await featureRepository.AddAsync(feature);
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task AddRangeAsync(IEnumerable<FeatureViewModel> entities)
@@ -86,5 +91,8 @@ namespace Carebook.Business.Services
             var features = _mapper.Map<Feature>(entity);
            _featureRepository.Update(features);
         }
+
+
+      
     }
 }

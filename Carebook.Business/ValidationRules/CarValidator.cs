@@ -21,8 +21,8 @@ namespace Carebook.Business.ValidationRules
                 RuleFor(x => x.SuitCase).NotEmpty().WithMessage("{SuitCase} boş bırakılamaz").WithName("Valiz Sayısı");
                 RuleFor(x => x.Licence).NotEmpty().WithMessage("{Licence} boş bırakılamaz").WithName("Ehliyeti");
                 RuleFor(x => x.Plate).NotEmpty().WithMessage("{Plate} boş bırakılamaz").WithName("Araç Plakası");
-                RuleFor(x => x.PhotoFiles).NotEmpty();
-                RuleFor(x => x.PhotoBase64).NotEmpty();
+                //RuleFor(x => x.PhotoFiles).NotEmpty();
+                //RuleFor(x => x.PhotoBase64).NotEmpty();
 
 
             // RuleFor(user => user.Email)

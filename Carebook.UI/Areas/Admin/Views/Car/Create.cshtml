@@ -1,5 +1,4 @@
-﻿
-@model CarViewModel
+﻿@model CarViewModel
 @{
     ViewData["title"] = "Araç Ekle";
 }
@@ -150,33 +149,59 @@
     <partial name="_ValidationScriptsPartial" />
     <script src="~/js/Projects.js"></script>
     <script>
-        $(() => {
-            $('#PhotoFile').change(function () {
+        // $(document).ready(function () {
+        //     $('#submitCarForm').click(function (e) {
+        //         e.preventDefault();
+
+        //         var formData = new FormData();
+
+        //         // Tekli fotoğraf için
+        //         var singlePhoto = $('#PhotoFile')[0].files[0];  // Tek resim
+        //         if (singlePhoto) {
+        //             formData.append("singlePhoto", singlePhoto);  // Tek resim parametresi
+        //         }
+
+        //         // Çoklu fotoğraf için
+        //         var multiplePhotos = $('#PhotoFiles')[0].files;  // Çoklu resimler
+        //         for (var i = 0; i < multiplePhotos.length; i++) {
+        //             formData.append("multiplePhotos", multiplePhotos[i]);  // Çoklu resim parametresi
+        //         }
+
+        //         // AJAX ile gönderim
+        //         $.ajax({
+        //             url: '/Car/Create',
+        //             type: 'POST',
+        //             data: formData,
+        //             processData: false,
+        //             contentType: false,
+        //             success: function (response) {
+        //                 if (response.success) {
+        //                     alert(response.message);
+        //                     // Başarıyla gönderildikten sonra yapılacak işlemler
+        //                     window.location.href = "/Car/Index"; // Sayfayı başka bir yere yönlendirebilirsiniz
+        //                 }
+        //             },
+        //             error: function () {
+        //                 alert('Hata oluştu.');
+        //             }
+        //         });
+        //     });
+        // });
+
+
+
+
+        $('#PhotoFiles').change(function () {
+            var files = document.getElementById("PhotoFiles").files;
+            $('#photoGallery').empty(); // Önceki fotoğrafları temizle
+
+            for (var i = 0; i < files.length; i++) {
                 var reader = new FileReader();
                 reader.onloadend = function (event) {
-                    $('#PhotoPreview').attr('src', reader.result).removeClass('d-none');
-
+                    $('#photoGallery').append('<div class="p-2 border mr-2"><img src="' + event.currentTarget.result + '" height="120" /></div>');
                 }
-                reader.readAsDataURL(document.getElementById("PhotoFile").files[0]);
-            });
-
-            $('#PhotoFiles').change(function () {
-                var files = document.getElementById("PhotoFiles").files;
-
-                for (var i = 0; i < files.length; i++) {
-                    console.log(i);
-                    var reader = new FileReader();
-                    reader.onloadend = function (event) {
-                        $('#photoGallery').append('<div class="p-2 border mr-2"><img src="' + event.currentTarget.result + '" height="120" /></div>')
-                    }
-                    reader.readAsDataURL(files[i]);
-                }
-            });
-
-            //$('.summernote').summernote({
-            //    height: 400
-            //});
-
+                reader.readAsDataURL(files[i]);
+            }
         });
     </script>
 }

@@ -7,8 +7,6 @@ using Carebook.DataAccess.Context;
 using Carebook.DataAccess.Interface;
 using Carebook.DataAccess.Repositories;
 using Carebook.DataAccess.UnitOfWork;
-using Carebook.Entities;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -36,7 +34,8 @@ builder.Services.AddScoped<ICarFeatureService, CarFeatureService>();
 builder.Services.AddScoped<ICarPageListRepository, CarPageListRepository>();
 builder.Services.AddScoped<ICarPageListService, CarPageListService>();
 builder.Services.AddScoped<IService<FeatureViewModel>, FeatureService>();
-
+builder.Services.AddScoped<IFeatureService, FeatureNameService>();
+builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
 var app = builder.Build();
 
 

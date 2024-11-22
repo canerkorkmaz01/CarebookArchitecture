@@ -24,5 +24,10 @@ namespace Carebook.DataAccess.Repositories
             })
             .ToListAsync();
         }
+
+        public async Task GetFeatureById(int id)
+        {
+          await _context.Features.FindAsync(id);
+        }
     }
 }

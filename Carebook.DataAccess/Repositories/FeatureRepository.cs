@@ -1,8 +1,8 @@
-﻿using Carebook.DataAccess.Context;
+﻿using Carebook.Common.ViewModels;
+using Carebook.DataAccess.Context;
 using Carebook.DataAccess.Interface;
 using Carebook.Entities;
 using Microsoft.EntityFrameworkCore;
-
 
 namespace Carebook.DataAccess.Repositories
 {
@@ -18,6 +18,13 @@ namespace Carebook.DataAccess.Repositories
         public async Task<List<Feature>> GetAllAsync()
         {
             return await _context.Features.ToListAsync();
+        }
+
+        public async Task<List<Feature>> GetAllNameAsync()
+        {
+            return await _context.Features
+                 .Include(f => f.User)
+                .OrderBy(x => x.Name).ToListAsync();
         }
     }
 }

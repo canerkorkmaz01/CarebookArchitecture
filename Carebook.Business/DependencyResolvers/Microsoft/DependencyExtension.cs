@@ -32,7 +32,6 @@ namespace Carebook.Business.DependencyResolvers.Microsoft
             service.AddScoped<IService<CarViewModel>, CarService>();
             service.AddScoped<IUserService, UserService>();
 
- 
 
             service.AddIdentity<User, Role>(options =>
             {

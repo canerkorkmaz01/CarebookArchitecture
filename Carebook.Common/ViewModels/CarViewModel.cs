@@ -1,4 +1,5 @@
 ﻿using Carebook.Common.Enums;
+using Microsoft.AspNetCore.Http;
 
 namespace Carebook.Common.ViewModels
 {
@@ -33,7 +34,7 @@ namespace Carebook.Common.ViewModels
 
         public string? PhotoBase64 { get; set; }
 
-        public byte[]? PhotoFiles { get; set; }
+        public IFormFile[]? PhotoFiles { get; set; }
 
         public virtual bool Enabled { get; set; }
 

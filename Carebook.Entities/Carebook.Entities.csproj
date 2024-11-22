@@ -11,8 +11,4 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.10" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Carebook.Common\Carebook.Common.csproj" />
-  </ItemGroup>
-
 </Project>
