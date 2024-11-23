@@ -48,17 +48,17 @@ namespace Carebook.DataAccess.Repositories
             await _dbSet.AddRangeAsync(entities);
         }
 
-        public void Update(T entity)
+        public async Task Update(T entity)
         {
             _dbSet.Update(entity);
         }
 
-        public void Remove(T entity)
+        public async Task Remove(T entity)
         {
-            _dbSet.Remove(entity);
+           _dbSet.Remove(entity);
         }
 
-        public void RemoveRange(IEnumerable<T> entities)
+        public async Task RemoveRange(IEnumerable<T> entities)
         {
             _dbSet.RemoveRange(entities);
         }

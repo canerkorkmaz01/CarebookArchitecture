@@ -74,22 +74,28 @@ namespace Carebook.Business.Services
             return _mapper.Map< IQueryable<FeatureViewModel>>(features);
         }
 
-        public void Remove(FeatureViewModel entity)
+        public async Task Remove(FeatureViewModel entity)
         {
             var feature = _mapper.Map<Feature>(entity);
-            _featureRepository.Remove(feature);
+            var featurerepository = _unitOfWork.Repository<Feature>();
+            await _featureRepository.Remove(feature);
+            await _unitOfWork.SaveChangesAsync();
         }
 
-        public void RemoveRange(IEnumerable<FeatureViewModel> entities)
+        public async Task RemoveRange(IEnumerable<FeatureViewModel> entities)
         {
             var features = _mapper.Map<IEnumerable<Feature>>(entities);
-           _featureRepository.RemoveRange(features);
+            var featurerepository = _unitOfWork.Repository<Feature>();
+            await _featureRepository.RemoveRange(features);
+            await _unitOfWork.SaveChangesAsync();
         }
 
-        public void Update(FeatureViewModel entity)
+        public async Task Update(FeatureViewModel entity)
         {
             var features = _mapper.Map<Feature>(entity);
-           _featureRepository.Update(features);
+            var featureRepository = _unitOfWork.Repository<Feature>();
+            await _featureRepository.Update(features);
+            await _unitOfWork.SaveChangesAsync();
         }
 
 

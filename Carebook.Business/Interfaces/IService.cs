@@ -10,9 +10,9 @@ namespace Carebook.Business.Interfaces
         Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate, bool asNoTracking = true);
         Task AddAsync(T entity);
         Task AddRangeAsync(IEnumerable<T> entities);
-        void Update(T entity);
-        void Remove(T entity);
-        void RemoveRange(IEnumerable<T> entities);
+        Task Update(T entity);
+        Task Remove(T entity);
+        Task RemoveRange(IEnumerable<T> entities);
         Task<int> CountAsync(Expression<Func<T, bool>> predicate = null);
         Task<IEnumerable<T>> GetPagedResponseAsync(int pageNumber, int pageSize, bool asNoTracking = true);
         IQueryable<T> GetQuery(bool asNoTracking = true);

@@ -59,19 +59,19 @@ namespace Carebook.Business.Services
             return _carPictureRepository.GetQuery(asNoTracking);
         }
 
-        public void Remove(CarPicture entity)
+        public async Task Remove(CarPicture entity)
         {
-            _carPictureRepository.Remove(entity);
+            await _carPictureRepository.Remove(entity);
         }
 
-        public void RemoveRange(IEnumerable<CarPicture> entities)
+        public async Task RemoveRange(IEnumerable<CarPicture> entities)
         {
-            _carPictureRepository.RemoveRange(entities);
+            await _carPictureRepository.RemoveRange(entities);
         }
 
-        public void Update(CarPicture entity)
+        public async Task Update(CarPicture entity)
         {
-            _carPictureRepository.Update(entity);
+           await _carPictureRepository.Update(entity);
         }
     }
 }

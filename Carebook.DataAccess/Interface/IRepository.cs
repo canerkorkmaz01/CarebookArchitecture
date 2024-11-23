@@ -1,10 +1,5 @@
 ﻿using Carebook.Entities.Infrastructure;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Carebook.DataAccess.Interface
 {
@@ -26,13 +21,13 @@ namespace Carebook.DataAccess.Interface
         Task AddRangeAsync(IEnumerable<T> entities);
 
         // Veri güncellemek
-        void Update(T entity);
+        Task Update(T entity);
 
         // Veri silmek
-        void Remove(T entity);
+        Task Remove(T entity);
 
         // Birden fazla veriyi silmek
-        void RemoveRange(IEnumerable<T> entities);
+        Task RemoveRange(IEnumerable<T> entities);
 
         // Şarta bağlı sayım yapmak
         Task<int> CountAsync(Expression<Func<T, bool>> predicate = null);

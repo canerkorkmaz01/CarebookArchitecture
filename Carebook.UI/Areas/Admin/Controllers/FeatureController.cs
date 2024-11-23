@@ -1,6 +1,5 @@
 ﻿using Carebook.Business.Interfaces;
 using Carebook.Common.ViewModels;
-using Carebook.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,16 +13,12 @@ namespace Carebook.UI.Areas.Admin.Controllers
     {
 
         private const string entityName = "Araç Özelliği";
-        private readonly ICarFeatureService _carFeatureService;
-        private readonly ICarPageListService _carPageListService;
+
         private readonly IService<FeatureViewModel> _featureService;
         private readonly IService<CarViewModel> _carService;
         private readonly IFeatureService _featureServices;
-        public FeatureController(ICarPageListService carPageListService, ICarFeatureService carFeatureService, 
-            IService<FeatureViewModel> featureService, IService<CarViewModel> carService,IFeatureService featureServices)
+        public FeatureController(IService<FeatureViewModel> featureService, IService<CarViewModel> carService,IFeatureService featureServices)
         {
-            _carPageListService = carPageListService;
-            _carFeatureService = carFeatureService;
             _featureService = featureService;
             _carService = carService;
             _featureServices = featureServices;
@@ -43,7 +38,6 @@ namespace Carebook.UI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(FeatureViewModel carFeature)
         {
-
             carFeature.DateCreated = DateTime.Now;
             carFeature.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             if (!ModelState.IsValid)
@@ -54,44 +48,67 @@ namespace Carebook.UI.Areas.Admin.Controllers
 
             try
             {
-                // Service katmanını çağır
                 await _featureService.AddAsync(carFeature);
                 TempData["success"] = "Özellik başarıyla eklendi.";
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                // Hata varsa logla
                 Console.WriteLine($"Hata: {ex.Message}");
                 TempData["error"] = "Bir hata oluştu.";
                 return View(carFeature);
             }
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            if (id == null)
+            {
+                NotFound();
+            }
+            var features = await _featureService.GetByIdAsync(id,true);
+            return View(features);
+        }
 
+        [HttpPost]
+        public async Task<IActionResult>  Edit(FeatureViewModel carFeature)
+        {
+            carFeature.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            try
+            {
+                await _featureService.Update(carFeature);
+                TempData["success"] = $"{entityName}Güncelleme İşlemi Başarıyla Tamamlanmıştır ";
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException)
+            {
 
-        //[HttpPost]
-        ////[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create(FeatureViewModel carFeature)
-        //{
-        //    carFeature.DateCreated = DateTime.Now;
-        //    carFeature.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+                TempData["error"] = $"{entityName} Güncelleme işlemi aynı isimli bir kayıt olduğu için tamamlanamıyor.";
+                return View(carFeature);
+            }
+        }
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        try
-        //        {
-        //            await _featureService.AddAsync(carFeature);
-        //            TempData["success"] = $"{entityName} Ekleme işlemi başarıyla tamamlanmıştır";
-        //            return RedirectToAction("Index");
-        //        }
-        //        catch (DbUpdateException)
-        //        {
-        //            TempData["error"] = $"{entityName} Eklem işlemi aynı isimli bir kayıt olduğu için tamamlanamıyor.";
-        //            return View(carFeature);
-        //        }
-        //    }
-        //    return View(carFeature);
-        //}
+        public async Task <IActionResult> Delete(int id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var features = await _featureService.GetByIdAsync(id, true);
+
+            try
+            {
+                await _featureService.Remove(features);
+                TempData["success"] = $" {entityName}Silme İşlemi Başarıyla Gerçekleştirilmiştir";
+
+            }
+            catch (DbUpdateException e)
+            {
+                TempData["success"] = $"{e} Silme işlemi Başarısız Olmuştur";
+            }
+            return RedirectToAction("Index");
+        }
+
     }
 }

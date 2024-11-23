@@ -54,19 +54,19 @@ namespace Carebook.Business.Services
            return _contactRepository.GetQuery(asNoTracking);    
         }
 
-        public  void Remove(Contact entity)
+        public async Task Remove(Contact entity)
         {
-             _contactRepository.Remove(entity);
+            await _contactRepository.Remove(entity);
         }
 
-        public  void RemoveRange(IEnumerable<Contact> entities)
+        public async Task RemoveRange(IEnumerable<Contact> entities)
         {
-            _contactRepository.RemoveRange(entities);   
+           await _contactRepository.RemoveRange(entities);   
         }
 
-        public void Update(Contact entity)
+        public async Task Update(Contact entity)
         {
-            _contactRepository.Update(entity);  
+           await _contactRepository.Update(entity);  
         }
     }
 }

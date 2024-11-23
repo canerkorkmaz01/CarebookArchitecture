@@ -80,22 +80,22 @@ namespace Carebook.Business.Services
             return carViewModelList.AsQueryable(); 
         }
 
-        public void Remove(CarViewModel viewModel)
+        public async Task Remove(CarViewModel viewModel)
         {
             var car = _mapper.Map<Car>(viewModel);
-            _carRepository.Remove(car);
+           await _carRepository.Remove(car);
         }
 
-        public void RemoveRange(IEnumerable<CarViewModel> viewModels)
+        public async Task RemoveRange(IEnumerable<CarViewModel> viewModels)
         {
             var cars = _mapper.Map<IEnumerable<Car>>(viewModels);
-            _carRepository.RemoveRange(cars);
+           await _carRepository.RemoveRange(cars);
         }
 
-        public void Update(CarViewModel viewModel)
+        public async Task Update(CarViewModel viewModel)
         {
             var car = _mapper.Map<Car>(viewModel); 
-            _carRepository.Update(car);
+           await _carRepository.Update(car);
         }
     }
 }

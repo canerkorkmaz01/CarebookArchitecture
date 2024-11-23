@@ -54,19 +54,19 @@ namespace Carebook.Business.Services
            return _pricingRepository.GetQuery(asNoTracking);  
         }
 
-        public void Remove(Pricing entity)
+        public async Task Remove(Pricing entity)
         {
-            _pricingRepository.Remove(entity);
+           await _pricingRepository.Remove(entity);
         }
 
-        public void RemoveRange(IEnumerable<Pricing> entities)
+        public async Task RemoveRange(IEnumerable<Pricing> entities)
         {
-          _pricingRepository.RemoveRange(entities); 
+         await _pricingRepository.RemoveRange(entities); 
         }
 
-        public void Update(Pricing entity)
+        public async Task Update(Pricing entity)
         {
-            _pricingRepository.Update(entity);
+           await _pricingRepository.Update(entity);
         }
     }
 }

@@ -55,19 +55,19 @@ namespace Carebook.Business.Services
             return _reservationRepository.GetQuery(asNoTracking);
         }
 
-        public void Remove(Reservation entity)
+        public async Task Remove(Reservation entity)
         {
-            _reservationRepository.Remove(entity);  
+           await _reservationRepository.Remove(entity);  
         }
 
-        public void RemoveRange(IEnumerable<Reservation> entities)
+        public async Task RemoveRange(IEnumerable<Reservation> entities)
         {
-            _reservationRepository.RemoveRange(entities);   
+           await _reservationRepository.RemoveRange(entities);   
         }
 
-        public void Update(Reservation entity)
+        public async Task Update(Reservation entity)
         {
-            _reservationRepository.Update(entity);  
+           await _reservationRepository.Update(entity);  
         }
     }
 }
