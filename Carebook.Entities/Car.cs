@@ -1,6 +1,7 @@
 ﻿using Carebook.Common.Enums;
 
 using Carebook.Entities.Infrastructure;
+using Microsoft.AspNetCore.Http;
 
 namespace Carebook.Entities
 {
@@ -35,9 +36,9 @@ namespace Carebook.Entities
         public int[]? SelectedFeatures { get; set; }
 
         //[Display(Name = "Foto")]
-        public string? PhotoBase64 { get; set; }
+        public IFormFile PhotoFile { get; set; }
 
-        public byte[]? PhotoFiles { get; set; }
+        public IFormFile[] PhotoFiles { get; set; }
 
         public virtual ICollection<CarPicture> CarPictures { get; set; } = new HashSet<CarPicture>();
         public virtual ICollection<Feature> Features { get; set; } = new HashSet<Feature>();

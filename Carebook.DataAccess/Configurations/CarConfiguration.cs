@@ -12,7 +12,7 @@ namespace Carebook.DataAccess.Configurations
 
             builder.Ignore(p => p.SelectedFeatures);
 
-            builder.Ignore(p => p.PhotoBase64);
+            builder.Ignore(p => p.PhotoFile);
 
             builder.Ignore(p => p.PhotoFiles);
             builder

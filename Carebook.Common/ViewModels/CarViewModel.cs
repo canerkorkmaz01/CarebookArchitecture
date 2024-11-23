@@ -32,9 +32,9 @@ namespace Carebook.Common.ViewModels
 
         public int[]? SelectedFeatures { get; set; }
 
-        public string? PhotoBase64 { get; set; }
+        public IFormFile PhotoFile { get; set; }
 
-        public IFormFile[]? PhotoFiles { get; set; }
+        public IFormFile[] PhotoFiles { get; set; }
 
         public virtual bool Enabled { get; set; }
 

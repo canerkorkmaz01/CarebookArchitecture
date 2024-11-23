@@ -1,20 +1,17 @@
 ﻿using Carebook.Business.Interfaces;
-using Carebook.Business.Services;
 using Carebook.Common.ViewModels;
 using Carebook.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Processing;
 using System.Drawing;
-using System.Drawing.Imaging;
 using System.Security.Claims;
+using Color = SixLabors.ImageSharp.Color;
 using Image = SixLabors.ImageSharp.Image;
-
+using Size = SixLabors.ImageSharp.Size;
 
 
 
@@ -59,67 +56,180 @@ namespace Carebook.UI.Areas.Admin.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> Create(CarViewModel model, IFormFile PhotoFile, IFormFile[] PhotoFiles)
+        public async Task<IActionResult> Create(CarViewModel model)
         {
-            if (ModelState.IsValid)
+            if (model.PhotoFile != null)
             {
-                // Fotoğraf dosyasını işleyelim ve 600x600 boyutunda kaydedelim
-                if (PhotoFile != null)
+                try
                 {
-                    using (var image = await Image.LoadAsync(PhotoFile.OpenReadStream()))
+                    using (var image = Image.Load(model.PhotoFile.OpenReadStream()))
                     {
-                        // Boyutlandırma işlemi
-                        image.Mutate(x => x.Resize(600, 600));
-
-                        var filePath = Path.Combine("wwwroot", "uploads", PhotoFile.FileName);
-                        await image.SaveAsync(filePath, new JpegEncoder());
-
-                        model.Photo = PhotoFile.FileName; // Resmin adını kaydediyoruz
-                    }
-                }
-
-                // Çoklu fotoğraf yüklemesi varsa
-                if (PhotoFiles != null && PhotoFiles.Length > 0)
-                {
-                    foreach (var file in PhotoFiles)
-                    {
-                        using (var image = await Image.LoadAsync(file.OpenReadStream()))
+                        image.Mutate(p =>
                         {
-                            // Boyutlandırma işlemi
-                            image.Mutate(x => x.Resize(600, 600));
-
-                            var filePath = Path.Combine("wwwroot", "uploads", file.FileName);
-                            await image.SaveAsync(filePath, new JpegEncoder());
-                        }
+                            p.Resize(new ResizeOptions
+                            {
+                                Mode = ResizeMode.Max,
+                                Size = new Size(600, 600)
+                            });
+                            p.BackgroundColor(Color.White);
+                            model.Photo = image.ToBase64String(JpegFormat.Instance);
+                        });
                     }
                 }
-
-                // Araç özelliklerini seçili olanlardan al
-                if (model.SelectedFeatures != null)
+                catch (UnknownImageFormatException)
                 {
-
-
-                    var features = await _featureService.GetAllAsync();
-                    model.SelectedFeatures.ToList().ForEach(p => model.Features.Add(features.Single(q => q.Id == p)));
-
-
-                    //model.Features = model.SelectedFeatures
-                    //    .Select(id => _carFeatureService.GetFeatureById(id) // Find metoduyla her ID'yi buluyoruz
-                    //    .Where(feature => feature != null)  // Null olanları filtreliyoruz
-                    //    .ToList());
+                    ModelState.AddModelError("", "Yüklenen dosya bilinen bir görsel biçiminde değil!");
+                    return View(model);
                 }
-
-                // Araç verisini kaydetme
-                model.Enabled = true; // Varsayılan olarak etkinleştir
-                await _carService.AddAsync(model);
-
-                // Başarılı işlem sonrası kullanıcıyı liste sayfasına yönlendiriyoruz
-                return RedirectToAction("Index", "Car");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Lütfen bir logo yükleyiniz!");
+                return View(model);
             }
 
-            // Eğer model geçerli değilse, formu yeniden gösteriyoruz
-            ViewBag.CarFeatures = await _carFeatureService.GetCarFeaturesAsync(); // Özellikler listesi
-            return View(model);
+            if (model.PhotoFiles != null)
+                foreach (var photoFile in model.PhotoFiles)
+                {
+                    try
+                    {
+                        using (var image = Image.Load(photoFile.OpenReadStream()))
+                        {
+                            image.Mutate(p =>
+                            {
+                                p.Resize(new ResizeOptions
+                                {
+                                    Mode = ResizeMode.Max,
+                                    Size = new Size(600, 600)
+                                });
+                                p.BackgroundColor(Color.White);
+                                var photo = new CarPicture
+                                {
+                                    UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value),
+                                    DateCreated = DateTime.Now,
+                                    Enabled = model.Enabled,
+                                    Photo = image.ToBase64String(JpegFormat.Instance)
+                                };
+                                model.CarPictures.Add(photo);
+                                context.Entry(photo).State = EntityState.Added;
+
+                            });
+
+                        }
+                    }
+                    catch (UnknownImageFormatException)
+                    {
+
+                    }
+                }
+
+            if (model.SelectedFeatures != null)
+            {
+                var features = await context.Features.ToListAsync();
+                model.SelectedFeatures.ToList().ForEach(p => model.Features.Add(features.Single(q => q.Id == p)));
+            }
+
+
+            model.DateCreated = DateTime.Now;
+            model.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            context.Entry(model).State = EntityState.Added;
+            ////model.Safe = Enum.GetName((Kasa)Convert.ToInt32(model.Safe));
+            try
+            {
+                await context.SaveChangesAsync();
+                TempData["success"] = $"{entityName} ekleme işlemi başarıyla tamamlanmıştır.";
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException)
+            {
+                TempData["error"] = $"{entityName} ekleme işlemi aynı isimli bir kayıt olduğu için tamamlanamıyor.";
+                return View(model);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //if (ModelState.IsValid)
+            //{
+            //    // Fotoğraf dosyasını işleyelim ve 600x600 boyutunda kaydedelim
+            //    if (PhotoFile != null)
+            //    {
+            //        using (var image = await Image.LoadAsync(PhotoFile.OpenReadStream()))
+            //        {
+            //            // Boyutlandırma işlemi
+            //            image.Mutate(x => x.Resize(600, 600));
+
+            //            var filePath = Path.Combine("wwwroot", "uploads", PhotoFile.FileName);
+            //            await image.SaveAsync(filePath, new JpegEncoder());
+
+            //            model.Photo = PhotoFile.FileName; // Resmin adını kaydediyoruz
+            //        }
+            //    }
+
+            //    // Çoklu fotoğraf yüklemesi varsa
+            //    if (PhotoFiles != null && PhotoFiles.Length > 0)
+            //    {
+            //        foreach (var file in PhotoFiles)
+            //        {
+            //            using (var image = await Image.LoadAsync(file.OpenReadStream()))
+            //            {
+            //                // Boyutlandırma işlemi
+            //                image.Mutate(x => x.Resize(600, 600));
+
+            //                var filePath = Path.Combine("wwwroot", "uploads", file.FileName);
+            //                await image.SaveAsync(filePath, new JpegEncoder());
+            //            }
+            //        }
+            //    }
+
+            //    // Araç özelliklerini seçili olanlardan al
+            //    if (model.SelectedFeatures != null)
+            //    {
+
+
+            //        var features = await _featureService.GetAllAsync();
+            //        model.SelectedFeatures.ToList().ForEach(p => model.Features.Add(features.Single(q => q.Id == p)));
+
+
+            //        //model.Features = model.SelectedFeatures
+            //        //    .Select(id => _carFeatureService.GetFeatureById(id) // Find metoduyla her ID'yi buluyoruz
+            //        //    .Where(feature => feature != null)  // Null olanları filtreliyoruz
+            //        //    .ToList());
+            //    }
+
+            //    // Araç verisini kaydetme
+            //    model.Enabled = true; // Varsayılan olarak etkinleştir
+            //    await _carService.AddAsync(model);
+
+            //    // Başarılı işlem sonrası kullanıcıyı liste sayfasına yönlendiriyoruz
+            //    return RedirectToAction("Index", "Car");
+            //}
+
+            //// Eğer model geçerli değilse, formu yeniden gösteriyoruz
+            //ViewBag.CarFeatures = await _carFeatureService.GetCarFeaturesAsync(); // Özellikler listesi
+            //return View(model);
         }
     }
 }
