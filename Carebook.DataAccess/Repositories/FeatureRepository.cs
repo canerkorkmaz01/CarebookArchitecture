@@ -17,7 +17,7 @@ namespace Carebook.DataAccess.Repositories
 
         public async Task<List<Feature>> GetAllAsync()
         {
-            return await _context.Features.ToListAsync();
+            return await _context.Features.AsNoTracking().ToListAsync();
         }
 
         public async Task<List<Feature>> GetAllNameAsync()

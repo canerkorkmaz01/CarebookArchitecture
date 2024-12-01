@@ -13,22 +13,26 @@ namespace Carebook.Business.Services
 
        private readonly IRepository<Car> _carRepository;
        private readonly IMapper _mapper;
-        public CarService(IRepository<Car> carRepository,IMapper mapper)
+        private readonly IUnitOfWork _unitOfWork;
+        public CarService(IRepository<Car> carRepository, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _carRepository = carRepository;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task AddAsync(CarViewModel viewModel)
         {
             var car = _mapper.Map<Car>(viewModel);
             await _carRepository.AddAsync(car);
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task AddRangeAsync(IEnumerable<CarViewModel> viewModels)
         {
             var cars = _mapper.Map<IEnumerable<Car>>(viewModels); 
             await _carRepository.AddRangeAsync(cars);
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task<int> CountAsync(Expression<Func<CarViewModel, bool>> predicate = null)
@@ -84,18 +88,21 @@ namespace Carebook.Business.Services
         {
             var car = _mapper.Map<Car>(viewModel);
            await _carRepository.Remove(car);
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task RemoveRange(IEnumerable<CarViewModel> viewModels)
         {
             var cars = _mapper.Map<IEnumerable<Car>>(viewModels);
            await _carRepository.RemoveRange(cars);
+            await _unitOfWork.SaveChangesAsync();
         }
 
         public async Task Update(CarViewModel viewModel)
         {
             var car = _mapper.Map<Car>(viewModel); 
            await _carRepository.Update(car);
+            await _unitOfWork.SaveChangesAsync();
         }
     }
 }

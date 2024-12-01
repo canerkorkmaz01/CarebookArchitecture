@@ -16,27 +16,8 @@ namespace Carebook.UI.Components
 
         public IViewComponentResult Invoke()
         {
-            try
-            {
-                var model = context.Contacts.SingleOrDefault(q => q.Enabled);
-
-                if (model == null)
-                {
-                    // Eğer model boş ise (örneğin, etkin bir Contact yoksa)
-                    return Content("Aktif iletişim bilgisi bulunamadı.");
-                }
-
-                return View(model);
-            }
-            catch (Exception ex)
-            {
-                // Hata mesajını loglama veya kullanıcıya dostça bir mesaj gösterme
-                // Örneğin: Loglama işlemi burada yapılabilir
-                Console.WriteLine(ex.Message); // veya bir log servisi kullanılabilir
-
-                // Kullanıcıya hata mesajı veya boş bir içerik dönme
-                return Content("Üzgünüz, iletişim bilgileri yüklenirken bir hata oluştu.");
-            }
+            var model = context.Contacts.SingleOrDefault(q => q.Enabled);
+            return View(model);
         }
     }
 }

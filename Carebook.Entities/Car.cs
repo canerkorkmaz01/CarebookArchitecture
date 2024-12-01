@@ -7,7 +7,6 @@ namespace Carebook.Entities
 {
     public class Car:BaseEntity
     {
-        
         public string? CarName { get; set; }
 
         public int Year { get; set; }

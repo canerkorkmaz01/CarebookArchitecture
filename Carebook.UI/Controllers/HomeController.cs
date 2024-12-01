@@ -24,6 +24,7 @@ namespace Carebook.UI.Controllers
                car => new CarViewModel
                {
                    CarName = car.CarName,
+                   Photo = car.Photo
                },
                query => query.OrderBy(carViewModel => carViewModel.CarName));
 

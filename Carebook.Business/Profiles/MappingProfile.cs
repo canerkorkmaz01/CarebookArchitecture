@@ -9,7 +9,24 @@ namespace Carebook.Business.Profiles
     {
         public MappingProfile()
         {
-            CreateMap<Car, CarViewModel>().ReverseMap();
+
+            CreateMap<UserViewModel, User>().ReverseMap();
+
+            CreateMap<Car, CarViewModel>()
+                .ForMember(dest => dest.PicturesToDeleted, opt => opt.Ignore())
+                .ForMember(dest => dest.SelectedFeatures, opt => opt.Ignore())
+                .ForMember(dest => dest.PhotoFile, opt => opt.Ignore())
+                .ForMember(dest => dest.PhotoFiles, opt => opt.Ignore())
+                .ForMember(dest => dest.User, opt => opt.Ignore());
+
+            CreateMap<CarViewModel, Car>()
+                .ForMember(dest => dest.CarPictures, opt => opt.Ignore())
+                .ForMember(dest => dest.Features, opt => opt.Ignore())
+                .ForMember(dest => dest.Reservations, opt => opt.Ignore())
+                .ForMember(dest => dest.Pricings, opt => opt.Ignore());
+
+
+            CreateMap<CarPictureViewModel, CarPicture>().ReverseMap();
             CreateMap<User, RegisterViewModel>().ReverseMap();
             CreateMap<Feature, FeatureViewModel>()
             .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))

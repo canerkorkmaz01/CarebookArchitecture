@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Carebook.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class DbCarebook : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -178,7 +178,7 @@ namespace Carebook.DataAccess.Migrations
                     SuitCase = table.Column<int>(type: "int", unicode: false, maxLength: 200, nullable: false),
                     Licence = table.Column<int>(type: "int", unicode: false, maxLength: 200, nullable: false),
                     Plate = table.Column<string>(type: "varchar(200)", unicode: false, maxLength: 200, nullable: false),
-                    Photo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Photo = table.Column<string>(type: "varchar(max)", unicode: false, nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Enabled = table.Column<bool>(type: "bit", nullable: false)

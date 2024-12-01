@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Carebook.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241121223129_Initial")]
-    partial class Initial
+    [Migration("20241201141041_DbCarebook")]
+    partial class DbCarebook
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,7 +86,8 @@ namespace Carebook.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Photo")
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Plate")
                         .IsRequired()

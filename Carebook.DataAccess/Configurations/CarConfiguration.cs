@@ -47,6 +47,12 @@ namespace Carebook.DataAccess.Configurations
                .IsUnique();
 
             builder
+                .Property(p => p.Photo)
+                .HasColumnType("varchar(max)")
+                .IsUnicode(false)   
+                .IsRequired(false); 
+
+            builder
                 .Property(p => p.CarName)
                 .IsUnicode(false)
                 .HasMaxLength(200)

@@ -1,4 +1,5 @@
 ﻿using Carebook.Common.Enums;
+using Carebook.Entities;
 using Microsoft.AspNetCore.Http;
 
 namespace Carebook.Common.ViewModels
@@ -38,10 +39,16 @@ namespace Carebook.Common.ViewModels
 
         public virtual bool Enabled { get; set; }
 
+        public virtual int UserId { get; set; }
+
+        public virtual DateTime DateCreated { get; set; }
+
+        public virtual User? User { get; set; }
+
 
         public virtual ICollection<CarPictureViewModel> CarPictures { get; set; } = new HashSet<CarPictureViewModel>();
         public virtual ICollection<FeatureViewModel> Features { get; set; } = new HashSet<FeatureViewModel>();
         public virtual ReservationViewModel Reservations { get; set; }
-        public PricingViewModel Pricings { get; set; }
+        public virtual PricingViewModel Pricings { get; set; }
     }
 }

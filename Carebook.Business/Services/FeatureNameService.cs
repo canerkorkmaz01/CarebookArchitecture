@@ -16,7 +16,13 @@ namespace Carebook.Business.Services
             _featureService = featureService;
         }
 
-    
+        public async Task<List<FeatureViewModel>> GetAllAsync()
+        {
+            var feature = await _featureService.GetAllAsync();
+            var featureViewModel =_mapper.Map<List<FeatureViewModel>>(feature);
+            return featureViewModel;
+        }
+
         public async Task<List<FeatureViewModel>> GetAllNameFeatures()
         {
             var feturesname = await _featureService.GetAllNameAsync();

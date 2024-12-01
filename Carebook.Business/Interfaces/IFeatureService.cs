@@ -12,5 +12,7 @@ namespace Carebook.Business.Interfaces
     {
         Task <List<FeatureViewModel>>GetAllNameFeatures();
 
+        Task<List<FeatureViewModel>> GetAllAsync();
+
     }
 }

@@ -1,4 +1,6 @@
 ﻿
+using Carebook.Entities;
+
 namespace Carebook.Common.ViewModels
 {
     public class CarPictureViewModel
@@ -7,6 +9,14 @@ namespace Carebook.Common.ViewModels
         public int CarId { get; set; }
 
         public string Photo { get; set; }
+
+        public virtual bool Enabled { get; set; }
+
+        public virtual int UserId { get; set; }
+
+        public virtual DateTime DateCreated { get; set; }
+
+        public virtual User? User { get; set; }
 
         public virtual CarViewModel Cars { get; set; }
     }

@@ -56,53 +56,33 @@
                 <h2 class="mb-2">Öne Çıkan Araçlar</h2>
             </div>
         </div>
-      
             <div class="row">
                 <div class="col-md-12">
                     <div class="carousel-car owl-carousel">
-                    @if (Model==null)
-                    {
-                        <div class="item">
-                            <div class="car-wrap rounded ftco-animate">
-                                <div class="img rounded d-flex align-items-end" style="background-image: url('');">
-                                </div>
-                                <div class="text">
-                                    <h2 class="mb-0"><a href="#">Araça Bulunamadı</a></h2>
-                                    <div class="d-flex mb-3">
-                                        @*<span class="cat">Cheverolet</span>*@
-                                        <p class="price ml-auto">0 TL <span>/Günlük</span></p>
-                                    </div>
-                                    <p class="d-flex mb-0 d-block"><a asp-controller="Reservation" asp-action="Create"  class="btn btn-primary py-2 mr-1">Şimdi Ayırtın</a> <a asp-controller="Car" asp-action="CarDetails"  class="btn btn-secondary py-2 ml-1">Detaylar</a></p>
-
-                                </div>
-                            </div>
-                        </div>
-                    }
-                    else{                       
+                   
                         @foreach (var carList in Model)
                         {
                             <div class="item">
                                 <div class="car-wrap rounded ftco-animate">
-                                    <div class="img rounded d-flex align-items-end" style="background-image: url(@carList.Photo);">
+                                <div class="img rounded d-flex align-items-end" style="background-image: url('@carList.Photo');">
+                                    @* <img src="data:image/jpeg;base64,@carList.Photo" alt="Car Image" />
+                                    <p>@carList.Photo</p> *@
                                     </div>
                                     <div class="text">
                                         <h2 class="mb-0"><a href="#">@carList.CarName</a></h2>
                                         <div class="d-flex mb-3">
                                             @*<span class="cat">Cheverolet</span>*@
-                                            <p class="price ml-auto">@carList.Pricings.DailyWages TL <span>/Günlük</span></p>
+                                            <p class="price ml-auto">@(carList.Pricings?.DailyWages.ToString("TL") ?? "0 TL") <span>/Günlük</span></p>
                                         </div>
-                                        <p class="d-flex mb-0 d-block"><a asp-controller="Reservation" asp-action="Create" asp-route-reservationid="@carList..Id" class="btn btn-primary py-2 mr-1">Şimdi Ayırtın</a> <a asp-controller="Car" asp-action="CarDetails" asp-route-id="@carList.Id" class="btn btn-secondary py-2 ml-1">Detaylar</a></p>
+                                        <p class="d-flex mb-0 d-block"><a asp-controller="Reservation" asp-action="Create" asp-route-reservationid="@carList.Id" class="btn btn-primary py-2 mr-1">Şimdi Ayırtın</a> <a asp-controller="Car" asp-action="CarDetails" asp-route-id="@carList.Id" class="btn btn-secondary py-2 ml-1">Detaylar</a></p>
 
                                     </div>
                                 </div>
                             </div>
                         }
-                    }
-                       
                     </div>
                 </div>
             </div>
-      
     </div>
 </section>
 

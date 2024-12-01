@@ -25,6 +25,7 @@ builder.Services.AddDependencies(builder.Configuration);
 builder.Services.AddDbContext<AppDbContext>(options =>
         options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer")));
 
+
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
@@ -36,6 +37,10 @@ builder.Services.AddScoped<ICarPageListService, CarPageListService>();
 builder.Services.AddScoped<IService<FeatureViewModel>, FeatureService>();
 builder.Services.AddScoped<IFeatureService, FeatureNameService>();
 builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseLazyLoadingProxies(false));
+
+
 var app = builder.Build();
 
 

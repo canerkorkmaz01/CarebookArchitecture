@@ -83,7 +83,8 @@ namespace Carebook.DataAccess.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Photo")
-                        .HasColumnType("nvarchar(max)");
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("Plate")
                         .IsRequired()
