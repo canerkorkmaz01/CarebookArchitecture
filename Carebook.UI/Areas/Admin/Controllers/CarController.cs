@@ -26,15 +26,18 @@ namespace Carebook.UI.Areas.Admin.Controllers
         private readonly IService<FeatureViewModel> _featureService;
         private readonly IService<CarViewModel> _carService;
         private readonly IFeatureService _featureList;
+        private readonly ICarPictureService _carPictureService;
+
 
         public CarController(ICarPageListService carPageListService, ICarFeatureService carFeatureService,
-            IService<FeatureViewModel> featureService, IService<CarViewModel> carService ,IFeatureService featureList)
+            IService<FeatureViewModel> featureService, IService<CarViewModel> carService ,IFeatureService featureList, ICarPictureService carPictureService)
         {
             _featureList = featureList;
             _carPageListService = carPageListService;
             _carFeatureService = carFeatureService;
             _featureService = featureService;
             _carService = carService;
+            _carPictureService = carPictureService;
         }
 
         public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
@@ -145,6 +148,23 @@ namespace Carebook.UI.Areas.Admin.Controllers
 
 
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            ViewBag.CarFeatures = await _carFeatureService.GetCarFeaturesAsync();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var model = await _carService.GetByIdAsync(id);
+            var features = await _featureList.GetAllAsync();
+            ViewBag.CarFeatures = await _carFeatureService.GetEditCarFeaturesAsync();
+            ViewBag.CarPicture = await _carPictureService.CarPictureAsync(id);
+            return View(model);
+        }
+
     }
 }
     

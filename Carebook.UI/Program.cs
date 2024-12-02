@@ -37,6 +37,8 @@ builder.Services.AddScoped<ICarPageListService, CarPageListService>();
 builder.Services.AddScoped<IService<FeatureViewModel>, FeatureService>();
 builder.Services.AddScoped<IFeatureService, FeatureNameService>();
 builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
+builder.Services.AddScoped<ICarPictureRepository, CarPictureRepository>();
+builder.Services.AddScoped<ICarPictureService, CarPictureAsyncService>();
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseLazyLoadingProxies(false));
 

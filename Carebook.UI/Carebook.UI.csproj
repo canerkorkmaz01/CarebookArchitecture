@@ -49,7 +49,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Carebook.Business\Carebook.Business.csproj" />
     <ProjectReference Include="..\Carebook.Common\Carebook.Common.csproj" />
-    <ProjectReference Include="..\Carebook.DataAccess\Carebook.DataAccess.csproj" />
   </ItemGroup>
 
   <ItemGroup>
