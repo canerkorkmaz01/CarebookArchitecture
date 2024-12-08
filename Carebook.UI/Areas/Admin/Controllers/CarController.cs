@@ -255,7 +255,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
             model.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             try
             {
-                await _carService.AddAsync(model);
+                await _carService.Update(model);
                 TempData["success"] = $"{entityName} ekleme işlemi başarıyla tamamlanmıştır.";
                 return RedirectToAction("Index");
             }
@@ -266,6 +266,26 @@ namespace Carebook.UI.Areas.Admin.Controllers
                 return View(model);
             }
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var model = await _carService.GetByIdAsync(id);
+            try
+            {
+                await _carService.Remove(model);
+                TempData["success"] = $"{entityName} silme işlemi başarıyla tamamlanmıştır.";
+            }
+            catch (DbUpdateException e)
+            {
+                TempData["success"] = $"{e} silme işlemi Başarısız Olmuştur";
+            }
+            return RedirectToAction("Index");
         }
 
     }
