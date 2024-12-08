@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Carebook.Common.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Carebook.Business.Interfaces
 {
     public interface ICarPictureService
     {
-        Task CarPictureAsync(int id);
+        Task <List<CarPictureViewModel>> CarPictureAsync(int id);
     }
 }

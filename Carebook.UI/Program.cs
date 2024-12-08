@@ -40,7 +40,7 @@ builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
 builder.Services.AddScoped<ICarPictureRepository, CarPictureRepository>();
 builder.Services.AddScoped<ICarPictureService, CarPictureAsyncService>();
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseLazyLoadingProxies(false));
+options.UseLazyLoadingProxies(false));
 
 
 var app = builder.Build();

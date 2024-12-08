@@ -7,6 +7,8 @@ namespace Carebook.Business.Interfaces
         Task<List<SelectListItem>> GetEditCarFeaturesAsync();
         Task<List<SelectListItem>> GetCarFeaturesAsync();
 
-        Task GetFeatureById (int id);    
+        Task GetFeatureById (int id);
+
+        Task<List<int>> GetCarFeatureIdsAsync(int carId);
     }
 }

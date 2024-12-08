@@ -1,7 +1,7 @@
 ﻿using Carebook.DataAccess.Context;
 using Carebook.DataAccess.Interface;
+using Carebook.Entities;
 using Microsoft.EntityFrameworkCore;
-
 
 namespace Carebook.DataAccess.Repositories
 {
@@ -14,9 +14,9 @@ namespace Carebook.DataAccess.Repositories
             _context = context;
         }
 
-        public async Task CarPictureAsync(int id)
+        public async Task<List<CarPicture>> CarPictureAsync(int id)
         {
-            await _context.CarPictures.Where(q=>q.CarId ==id).ToListAsync();
+           return await _context.CarPictures.Where(q => q.CarId == id).ToListAsync();
         }
     }
 }

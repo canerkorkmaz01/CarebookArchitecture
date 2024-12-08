@@ -8,6 +8,7 @@ namespace Carebook.DataAccess.Interface
 
         Task<List<SelectListItem>> GetCarFeaturesAsync();
 
-        Task GetFeatureById(int id);    
+        Task GetFeatureById(int id);
+        Task<List<int>> GetFeatureIdsByCarIdAsync(int carId);
     }
 }

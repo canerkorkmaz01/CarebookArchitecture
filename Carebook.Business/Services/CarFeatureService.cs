@@ -27,5 +27,10 @@ namespace Carebook.Business.Services
         {
             await _carFeatureRepository.GetFeatureById(id);
         }
+
+        public async Task<List<int>> GetCarFeatureIdsAsync(int carId)
+        {
+            return await _carFeatureRepository.GetFeatureIdsByCarIdAsync(carId);
+        }
     }
 }

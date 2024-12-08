@@ -28,16 +28,31 @@ namespace Carebook.DataAccess.Repositories
 
         public async Task<List<SelectListItem>> GetEditCarFeaturesAsync()
         {
-          var features= await _context.Features.ToListAsync();
-            return await _context.Features
-            .OrderBy(f => f.Name)
-            .Select(f => new SelectListItem
-            {
-                Value = f.Id.ToString(),
-                Text = f.Name,
-                Selected = features.Any(q => q.Id == f.Id)
-            })
-            .ToListAsync();
+            var features = await _context.Features.ToListAsync();
+
+            // LINQ sorgusunu bellekte çalıştırıyoruz
+            return features
+                .OrderBy(f => f.Name)
+                .Select(f => new SelectListItem
+                {
+                    Value = f.Id.ToString(),
+                    Text = f.Name,
+                    Selected = features.Any(p => p.Id == f.Id) // Bu kısım bellekte çalışacak
+                })
+                .ToList();
+        }
+
+
+        public async Task<List<int>> GetFeatureIdsByCarIdAsync(int carId)
+        {
+            var car = await _context.Cars
+                .Include(c => c.Features).AsNoTracking() 
+                .FirstOrDefaultAsync(c => c.Id == carId);
+
+            if (car == null)
+                throw new Exception("Car not found");
+
+            return car.Features.Select(f => f.Id).ToList();
         }
 
 

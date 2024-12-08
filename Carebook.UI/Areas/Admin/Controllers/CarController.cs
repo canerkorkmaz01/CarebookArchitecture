@@ -149,7 +149,6 @@ namespace Carebook.UI.Areas.Admin.Controllers
 
         }
 
-
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -163,6 +162,110 @@ namespace Carebook.UI.Areas.Admin.Controllers
             ViewBag.CarFeatures = await _carFeatureService.GetEditCarFeaturesAsync();
             ViewBag.CarPicture = await _carPictureService.CarPictureAsync(id);
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(CarViewModel model)
+        {
+
+            var original = await _carService.GetByIdAsync(model.Id);
+            var featuresIds = await _carFeatureService.GetCarFeatureIdsAsync(model.Id);
+            var features =  await _featureList.GetAllAsync();
+
+
+
+            if (model.SelectedFeatures != null)
+            {
+                model.SelectedFeatures
+                    .Except(featuresIds).ToList()
+                    .ForEach(p => original.Features.Add(features.Single(x => x.Id == p)));
+
+                featuresIds
+                    .Except(model.SelectedFeatures)
+                    .ToList()
+                    .ForEach(p => original.Features.Remove(features.Single(x => x.Id == p)));
+            }
+
+            if (model.PhotoFile != null)
+            {
+                try
+                {
+                    using (var image = Image.Load(model.PhotoFile.OpenReadStream()))
+                    {
+                        image.Mutate(p =>
+                        {
+                            p.Resize(new ResizeOptions
+                            {
+                                Mode = ResizeMode.Max,
+                                Size = new Size(600, 600)
+                            });
+                            p.BackgroundColor(Color.White);
+                            model.Photo = image.ToBase64String(JpegFormat.Instance);
+                        });
+                    }
+                }
+                catch (UnknownImageFormatException)
+                {
+                    ModelState.AddModelError("", "Yüklenen dosya bilinen bir görsel biçiminde değil!");
+                    return View(model);
+                }
+            }
+            //else
+            //{
+            //    ModelState.AddModelError("", "Lütfen bir logo yükleyiniz!");
+            //    return View(model);
+            //}
+            //var photo = new CarPictureViewModel();
+            if (model.PhotoFiles != null)
+                foreach (var photoFile in model.PhotoFiles)
+                {
+                    try
+                    {
+                        using (var image = Image.Load(photoFile.OpenReadStream()))
+                        {
+                            image.Mutate(p =>
+                            {
+                                p.Resize(new ResizeOptions
+                                {
+                                    Mode = ResizeMode.Max,
+                                    Size = new Size(600, 600)
+                                });
+                                p.BackgroundColor(Color.White);
+                                var photo = new CarPictureViewModel
+                                {
+                                    UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value),
+                                    DateCreated = DateTime.Now,
+                                    Enabled = model.Enabled,
+                                    Photo = image.ToBase64String(JpegFormat.Instance)
+                                };
+                                model.CarPictures.Add(photo);
+
+                                model.Photo = image.ToBase64String(JpegFormat.Instance);
+                            });
+
+                        }
+                    }
+                    catch (UnknownImageFormatException)
+                    {
+
+                    }
+                }
+
+            model.DateCreated = DateTime.Now;
+            model.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            try
+            {
+                await _carService.AddAsync(model);
+                TempData["success"] = $"{entityName} ekleme işlemi başarıyla tamamlanmıştır.";
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException)
+            {
+                TempData["error"] = $"{entityName} ekleme işlemi aynı isimli bir kayıt olduğu için tamamlanamıyor.";
+                ViewBag.CarFeatures = await _carFeatureService.GetCarFeaturesAsync();
+                return View(model);
+            }
+
         }
 
     }
