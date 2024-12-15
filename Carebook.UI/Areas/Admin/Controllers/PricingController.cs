@@ -34,11 +34,11 @@ namespace Carebook.UI.Areas.Admin.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Create(PricingViewModel pricing)
-        //{
-        //    ViewBag.Pricing = await _carDropdownList.GetCarDropdownListAsync();
-        //    return View();
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Create(PricingViewModel pricing)
+        {
+            ViewBag.Pricing = await _carDropdownList.GetCarDropdownListAsync();
+            return View();
+        }
     }
 }
