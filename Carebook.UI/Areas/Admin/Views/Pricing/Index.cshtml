@@ -53,49 +53,49 @@
                 </thead>
 
                 <tbody>
-                    @foreach (var pricing in Model)
+                    @if (Model != null && Model.Any())
                     {
-                        <tr>
-                            <td class="project-state" align="left">
-                                @pricing.Cars.CarName
-                            </td>
-                            <td class="project-state" align="left">
-                                @pricing.HourlyRate
-                            </td>
-                            <td class="project-state" align="left">
-                                @pricing.DailyWages
-                            </td>
-                            <td class="project-state" align="left">
-                                @pricing.MonthlyFee
-                            </td>
-                            <td class="project-state" align="left">
-                                @pricing.User.Name
-                            </td>
-                            <td class="project-state" align="left">
-                                @pricing.DateCreated
-                            </td>
-                            @if (pricing.Enabled)
-                            {
+                        @foreach (var pricing in Model)
+                        {
+                            <tr>
                                 <td class="project-state" align="left">
-                                    <span class="badge badge-success sp">Var</span>
+                                    @(pricing.Cars.CarName ?? "Araç bulunamadı")
                                 </td>
-                            }
-                            else
-                            {
                                 <td class="project-state" align="left">
-                                    <span class="badge badge-danger">Yok</span>
+                                    @pricing.HourlyRate
                                 </td>
-                            }
-                            <td class="d-flex justify-content-center">
-                                <partial name="RowButtonsPartial" model="@pricing" />
-                            </td>
-                        </tr>
+                                <td class="project-state" align="left">
+                                    @pricing.DailyWages
+                                </td>
+                                <td class="project-state" align="left">
+                                    @pricing.MonthlyFee
+                                </td>
+                                <td class="project-state" align="left">
+                                    @(pricing.User?.Name ?? "Bulunamadı")
+                                </td>
+                                <td class="project-state" align="left">
+                                    @pricing.DateCreated
+                                </td>
+                                @if (pricing.Enabled)
+                                {
+                                    <td class="project-state" align="left">
+                                        <span class="badge badge-success sp">Var</span>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td class="project-state" align="left">
+                                        <span class="badge badge-danger">Yok</span>
+                                    </td>
+                                }
+                                <td class="d-flex justify-content-center">
+                                    <partial name="RowButtonsPartial" model="@pricing" />
+                                </td>
+                            </tr>
 
+                        }
                     }
                 </tbody>
-
-
-
             </table>
         </div>
         <!-- /.card-body -->

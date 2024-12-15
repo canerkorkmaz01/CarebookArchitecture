@@ -1,72 +1,100 @@
-﻿using Carebook.Business.Interfaces;
+﻿using AutoMapper;
+using Carebook.Business.Interfaces;
+using Carebook.Common.ViewModels;
 using Carebook.DataAccess.Interface;
 using Carebook.Entities;
 using System.Linq.Expressions;
 
 namespace Carebook.Business.Services
 {
-    public class PricingService : IService<Pricing>
+    public class PricingService : IService<PricingViewModel>
     {
         private readonly IRepository<Pricing> _pricingRepository;
+        private readonly IMapper _mapper;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public PricingService(IRepository<Pricing> pricingRepository)
+        public PricingService(IRepository<Pricing> pricingRepository, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _pricingRepository = pricingRepository;
+            _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task AddAsync(Pricing entity)
+        public async Task AddAsync(PricingViewModel viewModel)
         {
-            await _pricingRepository.AddAsync(entity);
+            var pricing = _mapper.Map<Pricing>(viewModel);
+            await _pricingRepository.AddAsync(pricing);
+            await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task AddRangeAsync(IEnumerable<Pricing> entities)
+        public async Task AddRangeAsync(IEnumerable<PricingViewModel> viewModel)
         {
-            await _pricingRepository.AddRangeAsync(entities);   
+            var pricing = _mapper.Map<IEnumerable<Pricing>>(viewModel);
+            await _pricingRepository.AddRangeAsync(pricing);
+            await _unitOfWork.SaveChangesAsync();
         }
 
-        public async Task<int> CountAsync(Expression<Func<Pricing, bool>> predicate = null)
+        public async Task<int> CountAsync(Expression<Func<PricingViewModel, bool>> predicate = null)
         {
-            return await _pricingRepository.CountAsync(predicate);  
+            Expression<Func<Pricing, bool>> pricingPredicate = _mapper.Map<Expression<Func<PricingViewModel, bool>>, Expression<Func<Pricing, bool>>>(predicate);
+            return await _pricingRepository.CountAsync(pricingPredicate);
         }
 
-        public async Task<IEnumerable<Pricing>> FindAsync(Expression<Func<Pricing, bool>> predicate, bool asNoTracking = true)
+        public async Task<IEnumerable<PricingViewModel>> FindAsync(Expression<Func<PricingViewModel, bool>> predicate, bool asNoTracking = true)
         {
-           return await _pricingRepository.FindAsync(predicate, asNoTracking);    
+            Expression<Func<Pricing, bool>> carPredicate = _mapper.Map<Expression<Func<PricingViewModel, bool>>, Expression<Func<Pricing, bool>>>(predicate);
+            var pricing = await _pricingRepository.FindAsync(carPredicate, asNoTracking);
+            return _mapper.Map<IEnumerable<PricingViewModel>>(pricing);
         }
 
-        public async Task<IEnumerable<Pricing>> GetAllAsync(bool asNoTracking = true)
+        public async Task<IEnumerable<PricingViewModel>> GetAllAsync(bool asNoTracking = true)
         {
-           return await _pricingRepository.GetAllAsync(asNoTracking);
+            var pricing = await _pricingRepository.GetAllAsync(asNoTracking);
+             return  _mapper.Map<IEnumerable<PricingViewModel>>(pricing);
         }
 
-        public async Task<Pricing> GetByIdAsync(int id, bool asNoTracking = true)
+        public async Task<PricingViewModel> GetByIdAsync(int id, bool asNoTracking = true)
         {
-            return await GetByIdAsync(id, asNoTracking);    
+            var pricing = await _pricingRepository.GetByIdAsync(id,asNoTracking);
+            return _mapper.Map<PricingViewModel>(pricing);
         }
 
-        public async Task<IEnumerable<Pricing>> GetPagedResponseAsync(int pageNumber, int pageSize, bool asNoTracking = true)
+        public async Task<IEnumerable<PricingViewModel>> GetPagedResponseAsync(int pageNumber, int pageSize, bool asNoTracking = true)
         {
-           return await _pricingRepository.GetPagedResponseAsync(pageNumber, pageSize, asNoTracking);   
+            var pricing = await _pricingRepository.GetPagedResponseAsync(pageNumber, pageSize, asNoTracking);
+            return _mapper.Map<IEnumerable<PricingViewModel>>(pricing);
         }
 
-        public  IQueryable<Pricing> GetQuery(bool asNoTracking = true)
+        public  IQueryable<PricingViewModel> GetQuery(bool asNoTracking = true)
         {
-           return _pricingRepository.GetQuery(asNoTracking);  
+            var pricing = _pricingRepository.GetQuery(asNoTracking);   
+            var pricingList= pricing.ToList();  
+            var pricingModelView= _mapper.Map<IEnumerable<PricingViewModel>>(pricing);  
+            return pricingModelView.AsQueryable();  
         }
 
-        public async Task Remove(Pricing entity)
+        public async Task Remove(PricingViewModel viewModel)
         {
-           await _pricingRepository.Remove(entity);
+            var pricingviewmodel = _mapper.Map<Pricing>(viewModel);
+            await _pricingRepository.Remove(pricingviewmodel);
+            await _unitOfWork.SaveChangesAsync();
+
         }
 
-        public async Task RemoveRange(IEnumerable<Pricing> entities)
+        public async Task RemoveRange(IEnumerable<PricingViewModel> viewModel)
         {
-         await _pricingRepository.RemoveRange(entities); 
+            var pricingviewmodel = _mapper.Map<IEnumerable<Pricing>>(viewModel);
+            await _pricingRepository.RemoveRange(pricingviewmodel); 
+            await _unitOfWork.SaveChangesAsync(); 
         }
 
-        public async Task Update(Pricing entity)
+        public async Task Update(PricingViewModel viewModel)
         {
-           await _pricingRepository.Update(entity);
+            var pricingviewmodel = _mapper.Map<Pricing>(viewModel);
+            await _pricingRepository.Update(pricingviewmodel);
+            await _unitOfWork.SaveChangesAsync();   
         }
+
+        
     }
 }
