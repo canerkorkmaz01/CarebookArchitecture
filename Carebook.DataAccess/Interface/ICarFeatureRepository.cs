@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Carebook.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Carebook.DataAccess.Interface
 {
     public interface ICarFeatureRepository
     {
-        Task<List<SelectListItem>> GetEditCarFeaturesAsync();
+        Task<List<Feature>> GetEditCarFeaturesAsync();
 
-        Task<List<SelectListItem>> GetCarFeaturesAsync();
+        Task<List<Feature>> GetCarFeaturesAsync();
 
         Task GetFeatureById(int id);
-        Task<List<int>> GetFeatureIdsByCarIdAsync(int carId);
+        Task<Car> GetFeatureIdsByCarIdAsync(int carId);
     }
 }
