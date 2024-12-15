@@ -1,5 +1,7 @@
 ﻿
 
+using Carebook.Entities;
+
 namespace Carebook.Common.ViewModels
 { 
     public class PricingViewModel
@@ -10,5 +12,9 @@ namespace Carebook.Common.ViewModels
         public decimal DailyWages { get; set; }
         public decimal MonthlyFee { get; set; }
         public virtual CarViewModel Cars { get; set; }
+        public virtual int UserId { get; set; }
+        public virtual DateTime DateCreated { get; set; }
+        public virtual bool Enabled { get; set; }
+        public virtual User? User { get; set; }
     }
 }

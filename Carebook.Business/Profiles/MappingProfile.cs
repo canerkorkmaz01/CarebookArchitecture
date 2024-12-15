@@ -11,6 +11,7 @@ namespace Carebook.Business.Profiles
         {
 
             CreateMap<UserViewModel, User>().ReverseMap();
+            CreateMap<PricingViewModel, Pricing>().ReverseMap();
 
             CreateMap<Car, CarViewModel>()
                 .ForMember(dest => dest.PicturesToDeleted, opt => opt.Ignore())

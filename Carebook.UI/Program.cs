@@ -39,6 +39,12 @@ builder.Services.AddScoped<IFeatureService, FeatureNameService>();
 builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
 builder.Services.AddScoped<ICarPictureRepository, CarPictureRepository>();
 builder.Services.AddScoped<ICarPictureService, CarPictureAsyncService>();
+
+builder.Services.AddScoped<ICarDropdownList, GetCarDropdownList>();
+builder.Services.AddScoped<ICarDropdownListService, CarDropdownListService>();
+
+builder.Services.AddScoped<IPricingRepository, PricingRepository>();
+builder.Services.AddScoped<IPricingService, PricingCarService>();
 builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseLazyLoadingProxies(false));
 
