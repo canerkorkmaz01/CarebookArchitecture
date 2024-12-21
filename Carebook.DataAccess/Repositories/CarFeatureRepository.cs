@@ -1,7 +1,6 @@
 ﻿using Carebook.DataAccess.Context;
 using Carebook.DataAccess.Interface;
 using Carebook.Entities;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace Carebook.DataAccess.Repositories

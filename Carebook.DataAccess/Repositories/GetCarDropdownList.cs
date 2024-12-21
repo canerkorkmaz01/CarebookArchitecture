@@ -17,12 +17,8 @@ namespace Carebook.DataAccess.Repositories
 
         public async Task<IEnumerable<SelectListItem>> GetCarDropdownListAsync()
         {
-            var cars = await _context.Cars.OrderBy(p => p.CarName).ToListAsync();
-            return cars.Select(car => new SelectListItem
-            {
-                Value = car.Id.ToString(),
-                Text = car.CarName
-            });
+            return (IEnumerable<SelectListItem>)await _context.Cars.OrderBy(p => p.CarName).ToListAsync();
+            
 
         }
         }
