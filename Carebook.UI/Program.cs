@@ -42,7 +42,7 @@ builder.Services.AddScoped<ICarPictureService, CarPictureAsyncService>();
 
 builder.Services.AddScoped<IService<PricingViewModel>, PricingService>();
 
-builder.Services.AddScoped<ICarDropdownList, GetCarDropdownList>();
+builder.Services.AddScoped<ICarDropdownList, CarDropdownList>();
 builder.Services.AddScoped<ICarDropdownListService, CarDropdownListService>();
 
 builder.Services.AddScoped<IPricingRepository, PricingRepository>();

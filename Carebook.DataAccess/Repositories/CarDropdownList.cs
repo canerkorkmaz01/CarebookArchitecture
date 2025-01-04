@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Carebook.DataAccess.Repositories
 {
-    public class GetCarDropdownList : ICarDropdownList
+    public class CarDropdownList : ICarDropdownList
     {
         private readonly AppDbContext _context;
 
-        public GetCarDropdownList(AppDbContext context)
+        public CarDropdownList(AppDbContext context)
         {
             _context = context;
         }
