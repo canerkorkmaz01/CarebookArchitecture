@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Carebook.Common.ViewModels;
 using Carebook.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 
 namespace Carebook.Business.Profiles
@@ -12,10 +13,10 @@ namespace Carebook.Business.Profiles
 
             CreateMap<UserViewModel, User>().ReverseMap();
             CreateMap<Pricing, PricingViewModel>().ReverseMap();
+            CreateMap<Car, SelectListItem>()
+           .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id.ToString()))
+           .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.CarName));
 
-            //CreateMap<Pricing, PricingViewModel>()
-            // .ForMember(dest => dest.CarId,
-            //            opt => opt.MapFrom(src => src.Cars.CarName));
 
             CreateMap<Car, CarViewModel>()
                 .ForMember(dest => dest.PicturesToDeleted, opt => opt.Ignore())

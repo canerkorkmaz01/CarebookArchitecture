@@ -2,7 +2,6 @@
 using Carebook.Business.Interfaces;
 using Carebook.Common.ViewModels;
 using Carebook.DataAccess.Interface;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Carebook.Business.Services
 {
@@ -17,16 +16,13 @@ namespace Carebook.Business.Services
             _mapper = mapper;   
         }
 
-        public async Task<IEnumerable<SelectListItem>> GetCarDropdownlist()
+        public async Task<List<PricingViewModel>> GetCarDropdownlist()
         {
             var cars= await _carDropdownList.GetCarDropdownListAsync();
-            var car = _mapper.Map<IEnumerable<CarViewModel>>(cars);
-
-            return car.Select(car => new SelectListItem
-            {
-                Value = car.Id.ToString(),
-                Text = car.CarName
-            }).ToList();
+            return _mapper.Map<List<PricingViewModel>>(cars);
         }
+
+      
+
     }
 }

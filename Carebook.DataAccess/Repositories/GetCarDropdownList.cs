@@ -1,6 +1,6 @@
 ﻿using Carebook.DataAccess.Context;
 using Carebook.DataAccess.Interface;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Carebook.Entities;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -15,12 +15,12 @@ namespace Carebook.DataAccess.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<SelectListItem>> GetCarDropdownListAsync()
+        public async Task<List<Car>> GetCarDropdownListAsync()
         {
-            return (IEnumerable<SelectListItem>)await _context.Cars.OrderBy(p => p.CarName).ToListAsync();
+            return  await _context.Cars.OrderBy(p => p.CarName).ToListAsync();
             
 
         }
-        }
+      }
     }
 

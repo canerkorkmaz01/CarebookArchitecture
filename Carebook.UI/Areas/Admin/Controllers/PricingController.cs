@@ -1,9 +1,10 @@
 ﻿using Carebook.Business.Interfaces;
+using Carebook.Business.Services;
 using Carebook.Common.ViewModels;
 using Carebook.DataAccess.Interface;
-using Carebook.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 
 namespace Carebook.UI.Areas.Admin.Controllers
@@ -35,8 +36,11 @@ namespace Carebook.UI.Areas.Admin.Controllers
         [HttpGet]
         public async Task <IActionResult> Create()
         {
-            ViewBag.Pricing = await _carDropdownList.GetCarDropdownListAsync();
+            var Pricing = await _carDropdownList.GetCarDropdownListAsync();
+            var PricingSelectList = new SelectList(Pricing, "Id", "CarName");
+            ViewBag.Pricing = PricingSelectList;
             return View();
+          
         }
 
         [HttpPost]

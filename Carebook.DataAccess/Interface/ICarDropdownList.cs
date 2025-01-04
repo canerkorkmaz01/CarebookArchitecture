@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Carebook.Entities;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Carebook.DataAccess.Interface
 {
     public interface ICarDropdownList
     {
-        Task<IEnumerable<SelectListItem>> GetCarDropdownListAsync();
+        Task<List<Car>> GetCarDropdownListAsync();
     }
 }

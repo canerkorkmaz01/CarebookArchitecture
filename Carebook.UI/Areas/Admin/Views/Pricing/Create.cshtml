@@ -3,6 +3,8 @@
     ViewData["title"] = "Araç Fiyatlandırma";
 }
 
+
+
 <section class="content">
 
     <!-- Default box -->
@@ -33,7 +35,7 @@
                     <div class="form-row">
                         <div class="col-md-4 mb-3 form-group">
                             <label asp-for="CarId">Araç Adı</label>
-                            <select class="custom-select" asp-for="CarId" asp-items="@ViewBag.Pricing">
+                            <select class="custom-select" asp-for="CarId" asp-items="ViewBag.Pricing">
                                 <option selected="selected" value="">Araç Seçiniz</option>
                             </select>
                             <span asp-validation-for="CarId"></span>
@@ -72,7 +74,11 @@
     <!-- /.card -->
 </section>
 
+
+
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script src="~/js/Projects.js"></script>
+
+  
 }

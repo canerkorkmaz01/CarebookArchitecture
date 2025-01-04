@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Carebook.Common.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Carebook.Business.Interfaces
 {
     public interface ICarDropdownListService
     {
-        Task<IEnumerable<SelectListItem>> GetCarDropdownlist();
+        Task<List<PricingViewModel>> GetCarDropdownlist();
     }
 }
