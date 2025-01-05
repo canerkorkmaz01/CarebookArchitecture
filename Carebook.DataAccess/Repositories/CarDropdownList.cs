@@ -18,8 +18,6 @@ namespace Carebook.DataAccess.Repositories
         public async Task<List<Car>> GetCarDropdownListAsync()
         {
             return  await _context.Cars.OrderBy(p => p.CarName).ToListAsync();
-            
-
         }
       }
     }

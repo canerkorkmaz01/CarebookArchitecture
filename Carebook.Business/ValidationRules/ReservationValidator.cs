@@ -1,9 +1,10 @@
-﻿using Carebook.Entities;
+﻿using Carebook.Common.ViewModels;
+using Carebook.Entities;
 using FluentValidation;
 
 namespace Carebook.Business.ValidationRules
 {
-    public class ReservationValidator :AbstractValidator<Reservation>
+    public class ReservationValidator :AbstractValidator<ReservationViewModel>
     {
         public ReservationValidator()
         {
@@ -13,9 +14,9 @@ namespace Carebook.Business.ValidationRules
             RuleFor(x=>x.Telephone).NotEmpty().WithMessage("{Telephone} alanı boş bırakılamaz").WithName("Telefonu").Length(11).
                 WithMessage("Telefon numarası 11 haneli olarak giriniz");
             RuleFor(x => x.Email).NotEmpty().EmailAddress().WithMessage("{Email} alanı boş bırakılamaz").WithName("Email Adresi");
-            RuleFor(x => x.RentalDate).NotEmpty().SetValidator(new CustomDateFormatValidator<Reservation>("dd.MM.yyyy"));
-            RuleFor(x => x.PurchaseDate).NotEmpty().SetValidator(new CustomDateFormatValidator<Reservation>("dd.MM.yyyy"));
-            RuleFor(x => x.DeliveryDate).NotEmpty().SetValidator(new CustomDateFormatValidator<Reservation>("dd.MM.yyyy"));
+            RuleFor(x => x.RentalDate).NotEmpty().SetValidator(new CustomDateFormatValidator<ReservationViewModel>("dd.MM.yyyy"));
+            RuleFor(x => x.PurchaseDate).NotEmpty().SetValidator(new CustomDateFormatValidator<ReservationViewModel>("dd.MM.yyyy"));
+            RuleFor(x => x.DeliveryDate).NotEmpty().SetValidator(new CustomDateFormatValidator<ReservationViewModel>("dd.MM.yyyy"));
             RuleFor(x => x.FuelType).NotEmpty().WithMessage("{FuelType} alanı boş bırakılamaz").WithName("Yakıt Tipi");
             RuleFor(x => x.GearType).NotEmpty().WithMessage("{GearType} alanı boş bırakılamaz").WithName("Vites Tipi Soyadı");
         }

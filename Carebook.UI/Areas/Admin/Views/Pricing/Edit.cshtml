@@ -22,7 +22,7 @@
         <div class="table-responsive " style="width:100%">
 
             <div class="mt-2 container">
-                <form method="post" asp-action="Create">
+                <form method="post" asp-action="Edit">
                     @if (!ViewContext.ModelState.IsValid)
                     {
                         <div class="alert alert-danger">
@@ -33,16 +33,18 @@
                     <div class="form-row">
                         <div class="col-md-4 mb-3 form-group">
                             <label asp-for="CarId">Araç Adı</label>
-                            <select class="custom-select" asp-for="CarId" asp-items="ViewBag.Pricing">
+                            <select class="custom-select" asp-for="CarId" asp-items="@ViewBag.Pricing">
                                 <option selected="selected" value="">Araç Seçiniz</option>
                             </select>
                             <span asp-validation-for="CarId"></span>
                         </div>
-                        <div class="col-md-4 mb-3">
+
+                        <div class="col-md-4 mb-3 form-group">
                             <label asp-for="HourlyRate">Saatlik Kiralama Ücreti</label>
-                            <input type="number" asp-for="HourlyRate" class="form-control" id="book_off_date" placeholder="">
+                            <input type="number" class="form-control" id="week" asp-for="HourlyRate">
                             <span asp-validation-for="HourlyRate"></span>
                         </div>
+
                         <div class="col-md-4 mb-3">
                             <label asp-for="DailyWages" class="label">Günlük Kiralama Ücreti</label>
                             <input type="number" asp-for="DailyWages" class="form-control" id="book_off_date" placeholder="">
@@ -72,9 +74,7 @@
     <!-- /.card -->
 </section>
 
-
-
 @section Scripts {
-   @*  <partial name="_ValidationScriptsPartial" /> *@
+@*     <partial name="_ValidationScriptsPartial" /> *@
     <script src="~/js/Projects.js"></script>
 }

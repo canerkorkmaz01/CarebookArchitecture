@@ -1,10 +1,10 @@
 ﻿using Carebook.Business.Interfaces;
-using Carebook.Business.Services;
 using Carebook.Common.ViewModels;
 using Carebook.DataAccess.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace Carebook.UI.Areas.Admin.Controllers
@@ -28,9 +28,8 @@ namespace Carebook.UI.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-          
             var model = await _pricingRepository.GetPricingAsync();
-                return View(model);
+            return View(model);
         }
 
         [HttpGet]
@@ -57,11 +56,64 @@ namespace Carebook.UI.Areas.Admin.Controllers
             }
             catch (Exception)
             {
-
                 TempData["success"] = $"{entityName} Ekleme işlemi aynı isimli bir kayıt olduğu için tamamlanamıyor.";
                 return View(pricing);
             }
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var Pricing = await _carDropdownList.GetCarDropdownListAsync();
+            var PricingSelectList = new SelectList(Pricing, "Id", "CarName");
+            ViewBag.Pricing = PricingSelectList;
+            var model = await _carPricing.GetByIdAsync(id); 
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(PricingViewModel pricing)
+        {
+            var Pricing = await _carDropdownList.GetCarDropdownListAsync();
+            var PricingSelectList = new SelectList(Pricing, "Id", "CarName");
+            ViewBag.Pricing = PricingSelectList;
+            pricing.DateCreated = DateTime.Now;
+            pricing.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+
+            try
+            {
+                await _carPricing.Update(pricing);
+                TempData["success"] = $"{entityName} Güncelleme İşlemi Başarıyla Tamamlanmıştır";
+                return RedirectToAction("Index");
+            }
+            catch (Exception)
+            {
+                TempData["success"] = $"{entityName} Güncelleme işlemi aynı isimli bir kayıt olduğu için tamamlanamıyor.";
+                return View(pricing);
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (id == 0)
+            {
+                return NotFound();
+            }
+            var model =  await _carPricing.GetByIdAsync(id);
+          
+            try
+            {
+                await _carPricing.Remove(model);
+                TempData["success"] = $"{entityName} Silme İşlemi başarıyla Tamamlanmıştır";
+            }
+            catch (DbUpdateException)
+            {
+                TempData["success"] = "isimli kayıt, bir ya da daha fazla kayıt ile ilişkili olduuğundan silme işlemi yapılamıyor!";
+
+            }
+            return RedirectToAction("Index");
         }
     }
 }

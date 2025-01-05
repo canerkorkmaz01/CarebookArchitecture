@@ -23,15 +23,12 @@ namespace Carebook.Business.ValidationRules
             RuleFor(x => x.Password).NotEmpty().WithName("Parola").WithMessage("{PropertyName}  alanı boş bırakılamaz!");
             RuleFor(x => x.PasswordConfirm).NotEmpty().WithMessage("{PropertyName} alanı boş bırakılamaz!").WithName("Parola Tekrar").Equal(x => x.Password)
             .WithMessage("Şifre ve Şifre Onayı alanı aynı olmalıdır.");
-
-
-
            
         }
         private bool BeUniqueEmail(string email)
         {
-            var user = _userService.GetUserByEmail(email);  // Senkron olarak e-posta ile kullanıcıyı kontrol et
-            return user == null;  // Kullanıcı yoksa geçerli, varsa geçersiz
+            var user = _userService.GetUserByEmail(email);  
+            return user == null; 
         }
 
     }
