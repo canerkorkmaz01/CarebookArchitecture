@@ -39,12 +39,11 @@ builder.Services.AddScoped<IFeatureService, FeatureNameService>();
 builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
 builder.Services.AddScoped<ICarPictureRepository, CarPictureRepository>();
 builder.Services.AddScoped<ICarPictureService, CarPictureAsyncService>();
-
+builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
+builder.Services.AddScoped<IReservationService, ReservationListService>();
 builder.Services.AddScoped<IService<PricingViewModel>, PricingService>();
-
 builder.Services.AddScoped<ICarDropdownList, CarDropdownList>();
 builder.Services.AddScoped<ICarDropdownListService, CarDropdownListService>();
-
 builder.Services.AddScoped<IPricingRepository, PricingRepository>();
 builder.Services.AddScoped<IPricingService, PricingCarService>();
 builder.Services.AddDbContext<AppDbContext>(options =>

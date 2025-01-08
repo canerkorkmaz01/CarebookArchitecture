@@ -1,0 +1,9 @@
+﻿using Carebook.Common.ViewModels;
+
+namespace Carebook.Business.Interfaces
+{
+    public interface IReservationService
+    {
+        Task<List<ReservationViewModel>> ReservationList();
+    }
+}

@@ -1,4 +1,5 @@
 ﻿using Carebook.Common.Enums;
+using Carebook.Entities;
 
 namespace Carebook.Common.ViewModels
 {
@@ -14,6 +15,11 @@ namespace Carebook.Common.ViewModels
         public DateTime DeliveryDate { get; set; }
         public FuelType FuelType { get; set; }
         public GearType GearType { get; set; }
+        public virtual bool Enabled { get; set; }
+        public virtual int UserId { get; set; }
+        public virtual DateTime DateCreated { get; set; }
+        public virtual User? User { get; set; }
+
         public virtual CarViewModel Cars { get; set; }
     }
 }

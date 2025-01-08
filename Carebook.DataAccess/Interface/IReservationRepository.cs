@@ -1,0 +1,11 @@
+﻿using Carebook.Common.ViewModels;
+using Carebook.Entities;
+
+
+namespace Carebook.DataAccess.Interface
+{
+    public interface IReservationRepository
+    {
+        Task<List<Reservation>> GetReservationNameAsync();
+    }
+}
