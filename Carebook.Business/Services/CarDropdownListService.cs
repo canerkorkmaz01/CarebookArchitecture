@@ -16,10 +16,10 @@ namespace Carebook.Business.Services
             _mapper = mapper;   
         }
 
-        public async Task<List<PricingViewModel>> GetCarDropdownlist()
+        public async Task<List<CarViewModel>> GetCarDropdownlist()
         {
             var cars= await _carDropdownList.GetCarDropdownListAsync();
-            return _mapper.Map<List<PricingViewModel>>(cars);
+            return _mapper.Map<List<CarViewModel>>(cars);
         }
 
       

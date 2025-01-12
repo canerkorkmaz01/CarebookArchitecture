@@ -11,8 +11,14 @@ namespace Carebook.Business.Profiles
         public MappingProfile()
         {
 
+
+
+             CreateMap<Pricing, PricingViewModel>().ReverseMap();
+
+            CreateMap<Car, CarViewModel>(); // Eğer başka bir ViewModel varsa
+
             CreateMap<UserViewModel, User>().ReverseMap();
-            CreateMap<Pricing, PricingViewModel>().ReverseMap();
+ 
             CreateMap<Car, SelectListItem>()
            .ForMember(dest => dest.Value, opt => opt.MapFrom(src => src.Id.ToString()))
            .ForMember(dest => dest.Text, opt => opt.MapFrom(src => src.CarName));

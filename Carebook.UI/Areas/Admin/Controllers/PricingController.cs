@@ -1,6 +1,5 @@
 ﻿using Carebook.Business.Interfaces;
 using Carebook.Common.ViewModels;
-using Carebook.DataAccess.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -15,14 +14,13 @@ namespace Carebook.UI.Areas.Admin.Controllers
     {
         private const string entityName = "Araç Fiyatlandırma";
         private readonly IPricingService _pricingRepository;
-        private readonly ICarDropdownList _carDropdownList;
+        private readonly ICarDropdownListService _carDropdownList;
         private readonly IService<PricingViewModel> _carPricing;
 
-        public PricingController(IPricingService pricingRepository, ICarDropdownList carDropdownList, IService<PricingViewModel> carPricing)
+        public PricingController(IPricingService pricingRepository, ICarDropdownListService carDropdownList, IService<PricingViewModel> carPricing)
         {
             _pricingRepository = pricingRepository;
             _carDropdownList = carDropdownList;
-            _carPricing = carPricing;
             _carPricing=carPricing; 
         }
 
@@ -35,11 +33,10 @@ namespace Carebook.UI.Areas.Admin.Controllers
         [HttpGet]
         public async Task <IActionResult> Create()
         {
-            var Pricing = await _carDropdownList.GetCarDropdownListAsync();
+            var Pricing = await _carDropdownList.GetCarDropdownlist();
             var PricingSelectList = new SelectList(Pricing, "Id", "CarName");
             ViewBag.Pricing = PricingSelectList;
             return View();
-          
         }
 
         [HttpPost]
@@ -64,7 +61,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            var Pricing = await _carDropdownList.GetCarDropdownListAsync();
+            var Pricing = await _carDropdownList.GetCarDropdownlist();
             var PricingSelectList = new SelectList(Pricing, "Id", "CarName");
             ViewBag.Pricing = PricingSelectList;
             var model = await _carPricing.GetByIdAsync(id); 
@@ -74,7 +71,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(PricingViewModel pricing)
         {
-            var Pricing = await _carDropdownList.GetCarDropdownListAsync();
+            var Pricing = await _carDropdownList.GetCarDropdownlist();
             var PricingSelectList = new SelectList(Pricing, "Id", "CarName");
             ViewBag.Pricing = PricingSelectList;
             pricing.DateCreated = DateTime.Now;

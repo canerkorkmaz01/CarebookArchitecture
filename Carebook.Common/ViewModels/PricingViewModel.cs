@@ -17,6 +17,6 @@ namespace Carebook.Common.ViewModels
         public virtual DateTime DateCreated { get; set; }
         public virtual bool Enabled { get; set; }
         public virtual User? User { get; set; }
-        public List<SelectListItem> CarDropdown { get; set; }
+        //public List<SelectListItem> CarDropdown { get; set; }
     }
 }
