@@ -1,5 +1,6 @@
 ﻿using Carebook.Business.Interfaces;
 using Carebook.Common.ViewModels;
+using Carebook.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -28,6 +29,17 @@ namespace Carebook.UI.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var model = await _reservationList.ReservationList();
+
+
+
+
+            
+            foreach (var reservation in model)
+            {
+                Console.WriteLine($"CarName: {reservation.User.Name}");// sorun burada
+                Console.WriteLine($"CarName: {reservation.Cars.CarName}");
+            }
+
             return View(model);
         }
 
@@ -59,6 +71,61 @@ namespace Carebook.UI.Areas.Admin.Controllers
                 ViewBag.Reservation = reservationSelectList;
                 return View(reservation);
             }
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var reservation = await _carDropdownList.GetCarDropdownlist();
+            var reservationSelectList = new SelectList(reservation, "Id", "CarName");
+            ViewBag.Reservation = reservationSelectList;
+            var model = await _reservationService.GetByIdAsync(id);   
+            return View(model);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ReservationViewModel reservation)
+        {
+            reservation.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            reservation.DateCreated = DateTime.Now;
+       
+            try
+            {
+                await _reservationService.Update(reservation);
+                TempData["success"] = $"{entityName} Güncelleme İşlemi Başarıyla Tamamlanmıştır.";
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Hata oluştu: " + ex.Message);
+                TempData["error"] = $"{entityName} Güncelleme İşlemi Başarısız Oldu";
+                return View(reservation);
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var model = await _reservationService.GetByIdAsync(id);
+            try
+            {
+                await _reservationService.Remove(model);
+                TempData["success"] = $"{entityName} Silme İşlemi Başarıyla Tamamlanmıştır";
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException)
+            {
+                TempData["error"] = $"{entityName} Silme İşleminde Hata Oluştu";
+                return View("Index");
+            }
+
         }
     }
 }

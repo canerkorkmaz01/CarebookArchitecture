@@ -18,8 +18,7 @@ namespace Carebook.Common.ViewModels
         public virtual bool Enabled { get; set; }
         public virtual int UserId { get; set; }
         public virtual DateTime DateCreated { get; set; }
-        public virtual User? User { get; set; }
-
+        public virtual UserViewModel? User { get; set; }
         public virtual CarViewModel Cars { get; set; }
     }
 }

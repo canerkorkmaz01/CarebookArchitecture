@@ -7,7 +7,7 @@ namespace Carebook.Common.ViewModels
     public class CarViewModel
     {
         public int Id { get; set; }
-        public string? CarName { get; set; }
+        public string CarName { get; set; }
 
         public int Year { get; set; }
 

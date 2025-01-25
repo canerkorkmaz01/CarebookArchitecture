@@ -4,6 +4,6 @@ namespace Carebook.Business.Interfaces
 {
     public interface IReservationService
     {
-        Task<List<ReservationViewModel>> ReservationList();
+        Task<IEnumerable<ReservationViewModel>> ReservationList();
     }
 }

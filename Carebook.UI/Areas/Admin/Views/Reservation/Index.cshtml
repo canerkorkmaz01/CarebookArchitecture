@@ -23,7 +23,6 @@
                 <a asp-controller="Reservation" asp-action="Create" class="btn btn-info  mt-2 mb-2 "> <span class=" fas fa-plus"></span> Rezervasyon Ekle</a><br />
             </div>
             @*<span class="float-right"><input type="search" class="form-control float-right " placeholder="Arama" aria-controls="example"></span>*@
-
             <table id="myTable" class="table">
                 <thead>
                     <tr>
@@ -69,59 +68,63 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var Rezervasyon in Model)
-                    {
-                        <tr>
-                            <td class="text-nowrap">
-                                @Rezervasyon.Cars.CarName
-                            </td>
-                            <td class="text-nowrap">
-                                @Rezervasyon.NameSurname
-                            </td>
-                            <td class="text-nowrap">
-                                @Rezervasyon.Telephone
-                            </td>
-                            <td class="text-nowrap">
-                                @Rezervasyon.Email
-                            </td>
-                            <td>
-                                @Rezervasyon.RentalDate.ToShortDateString()
-                            </td>
-                            <td>
-                                @Rezervasyon.PurchaseDate.ToShortDateString()
-                            </td>
-                            <td>
-                                @Rezervasyon.DeliveryDate.ToShortDateString()
-                            </td>
-                            <td>
-                                @Rezervasyon.FuelType
-                            </td>
-                            <td>
-                                @Rezervasyon.GearType
-                            </td>
-                            <td class="text-nowrap">
-                                @Rezervasyon.User.Name
-                            </td>
-                            <td>
-                                @Rezervasyon.DateCreated.ToShortDateString()
-                            </td>
-                            @if (Rezervasyon.Enabled)
-                            {
-                                <td class="project-state">
-                                    <span class="badge badge-success">Aktif</span>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="project-state">
-                                    <span class="badge badge-danger">Pasif</span>
-                                </td>
-                            }
-                            <td class="d-flex justify-content-center">
-                                <partial name="RowButtonsPartial" model="@Rezervasyon" />
-                            </td>
-                        </tr>
 
+
+                    @if (Model != null && Model.Any())
+                    {
+                        @foreach (var Rezervasyon in Model)
+                        {
+                                <tr>
+                                    <td class="text-nowrap">
+                                        @Rezervasyon.Cars.CarName
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @Rezervasyon.NameSurname
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @Rezervasyon.Telephone
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @Rezervasyon.Email
+                                    </td>
+                                    <td>
+                                        @Rezervasyon.RentalDate.ToShortDateString()
+                                    </td>
+                                    <td>
+                                        @Rezervasyon.PurchaseDate.ToShortDateString()
+                                    </td>
+                                    <td>
+                                        @Rezervasyon.DeliveryDate.ToShortDateString()
+                                    </td>
+                                    <td>
+                                        @Rezervasyon.FuelType
+                                    </td>
+                                    <td>
+                                        @Rezervasyon.GearType
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @(Rezervasyon.User?.Name ?? "user name")
+                                    </td>
+                                    <td>
+                                        @Rezervasyon.DateCreated.ToShortDateString()
+                                    </td>
+                                    @if (Rezervasyon.Enabled)
+                                    {
+                                        <td class="project-state">
+                                            <span class="badge badge-success">Aktif</span>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td class="project-state">
+                                            <span class="badge badge-danger">Pasif</span>
+                                        </td>
+                                    }
+                                    <td class="d-flex justify-content-center">
+                                        <partial name="RowButtonsPartial" model="@Rezervasyon" />
+                                    </td>
+                                </tr>
+                        }
                     }
                 </tbody>
 

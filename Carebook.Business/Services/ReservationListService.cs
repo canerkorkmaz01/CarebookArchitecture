@@ -2,6 +2,7 @@
 using Carebook.Business.Interfaces;
 using Carebook.Common.ViewModels;
 using Carebook.DataAccess.Interface;
+using Carebook.Entities;
 
 namespace Carebook.Business.Services
 {
@@ -15,10 +16,11 @@ namespace Carebook.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<List<ReservationViewModel>> ReservationList()
+        public async Task<IEnumerable<ReservationViewModel>> ReservationList()
         {
             var reservation = await _reservationRepository.GetReservationNameAsync();
-            return _mapper.Map<List<ReservationViewModel>>(reservation);  
+
+            return _mapper.Map<IEnumerable<ReservationViewModel>>(reservation);  
         }
     }
 }

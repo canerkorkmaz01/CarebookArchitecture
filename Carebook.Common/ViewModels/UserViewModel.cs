@@ -1,8 +1,9 @@
 ﻿using Carebook.Common.Enums;
+using Microsoft.AspNetCore.Identity;
 
 namespace Carebook.Common.ViewModels
 {
-    public class UserViewModel
+    public class UserViewModel : IdentityUser<int>
     {
         public string Name { get; set; }
 

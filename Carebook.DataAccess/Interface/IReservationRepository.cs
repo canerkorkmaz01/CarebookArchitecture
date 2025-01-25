@@ -6,6 +6,6 @@ namespace Carebook.DataAccess.Interface
 {
     public interface IReservationRepository
     {
-        Task<List<Reservation>> GetReservationNameAsync();
+        Task<IEnumerable<Reservation>> GetReservationNameAsync();
     }
 }
