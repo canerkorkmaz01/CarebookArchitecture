@@ -1,12 +1,10 @@
-﻿
-@model IEnumerable<UserViewModel>
-@inject UserManager<UserViewModel> userManager
+﻿@model IEnumerable<UserViewModel>
+@* @inject UserManager<UserViewModel> userManager *@
 @{
     ViewData["Title"] = "Personeller";
 }
 
 <section class="content">
-
     <!-- Default box -->
     <div class="card">
         <div class="card-header">
@@ -47,7 +45,7 @@
                 <tbody>
                     @foreach (var user in Model)
                     {
-                        var roleName = (await userManager.GetRolesAsync(user)).First();
+                 @*        var roleName = (await userManager.GetRolesAsync(user)).First(); *@
                         <tr>
                             <td class="text-nowrap">
                                 @user.Name

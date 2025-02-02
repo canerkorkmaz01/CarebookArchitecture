@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Carebook.DataAccess.Migrations
 {
     /// <inheritdoc />
-    public partial class DbCarebook : Migration
+    public partial class carebook : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

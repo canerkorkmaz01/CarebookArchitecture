@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Carebook.DataAccess.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20241201141041_DbCarebook")]
-    partial class DbCarebook
+    [Migration("20250202204633_carebook")]
+    partial class carebook
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

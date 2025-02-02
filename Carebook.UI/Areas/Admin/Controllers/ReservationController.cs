@@ -1,6 +1,5 @@
 ﻿using Carebook.Business.Interfaces;
 using Carebook.Common.ViewModels;
-using Carebook.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -29,10 +28,6 @@ namespace Carebook.UI.Areas.Admin.Controllers
         public async Task<IActionResult> Index()
         {
             var model = await _reservationList.ReservationList();
-
-
-
-
             
             foreach (var reservation in model)
             {

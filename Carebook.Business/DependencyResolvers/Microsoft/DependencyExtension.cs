@@ -16,10 +16,7 @@ namespace Carebook.Business.DependencyResolvers.Microsoft
     {
         public static void AddDependencies(this IServiceCollection service,IConfiguration configuration)
         {
-          
-
             service.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
-
             service.AddValidatorsFromAssemblyContaining<CarValidator>();
             service.AddValidatorsFromAssemblyContaining<CarPictureValidator>();
             service.AddValidatorsFromAssemblyContaining<ContactValidator>();
@@ -31,7 +28,6 @@ namespace Carebook.Business.DependencyResolvers.Microsoft
             service.AddValidatorsFromAssemblyContaining<LoginViewModel>();
             service.AddScoped<IService<CarViewModel>, CarService>();
             service.AddScoped<IUserService, UserService>();
-
 
             service.AddIdentity<User, Role>(options =>
             {
