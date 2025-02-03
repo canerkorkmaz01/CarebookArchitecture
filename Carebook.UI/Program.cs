@@ -63,6 +63,10 @@ builder.Services.AddScoped<IService<ReservationViewModel>, ReservationService>()
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 builder.Services.AddScoped<IReservationService, ReservationListService>();
 
+builder.Services.AddScoped<IService<ContactViewModel>, ContactService>();
+builder.Services.AddScoped<IContactRepository, ContactListRepository>();
+builder.Services.AddScoped<IContactService, ContactListService>();
+
 builder.Services.AddScoped<IService<PricingViewModel>, PricingService>();
 builder.Services.AddScoped<ICarDropdownList, CarDropdownList>();
 builder.Services.AddScoped<ICarDropdownListService, CarDropdownListService>();
