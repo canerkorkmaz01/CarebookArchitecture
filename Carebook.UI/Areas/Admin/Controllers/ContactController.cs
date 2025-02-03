@@ -49,5 +49,11 @@ namespace Carebook.UI.Areas.Admin.Controllers
                 return View(contact);
             }
         }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var contact = _viewmodelService.GetByIdAsync(id);
+            return View(contact);
+        }
     }
 }
