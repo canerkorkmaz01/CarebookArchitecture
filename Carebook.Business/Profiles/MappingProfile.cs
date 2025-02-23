@@ -10,7 +10,10 @@ namespace Carebook.Business.Profiles
     {
         public MappingProfile()
         {
+           
+           
             CreateMap<UserViewModel, User>().ReverseMap();
+            CreateMap<ContactViewModel, Contact>().ReverseMap();
             CreateMap<Pricing, PricingViewModel>().ReverseMap();
           
             CreateMap<Reservation, ReservationViewModel>()

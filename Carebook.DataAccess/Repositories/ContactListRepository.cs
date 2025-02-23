@@ -17,7 +17,9 @@ namespace Carebook.DataAccess.Repositories
 
         public async Task<IEnumerable<Contact>> ContactList()
         {
-            return await _context.Contacts.OrderBy(x=> x.Address).ToListAsync();
+            return await _context.Contacts
+                .Include(u=>u.User)
+                .OrderBy(x=> x.Address).ToListAsync();
         }
     }
 }

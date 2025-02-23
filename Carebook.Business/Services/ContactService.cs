@@ -2,7 +2,6 @@
 using Carebook.Business.Interfaces;
 using Carebook.Common.ViewModels;
 using Carebook.DataAccess.Interface;
-using Carebook.DataAccess.Repositories;
 using Carebook.Entities;
 using System.Linq.Expressions;
 
@@ -23,10 +22,11 @@ namespace Carebook.Business.Services
 
         public async Task AddAsync(ContactViewModel viewModel)
         {
+
             var reservation = _mapper.Map<Contact>(viewModel);
             await _contactRepository.AddAsync(reservation);
             await _unitOfWork.SaveChangesAsync();
-          
+
         }
 
         public async Task AddRangeAsync(IEnumerable<ContactViewModel> viewModel)

@@ -1,4 +1,6 @@
-﻿using Carebook.DataAccess.Context;
+﻿using AutoMapper;
+using Carebook.Business.Interfaces;
+using Carebook.DataAccess.Context;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Carebook.UI.Components
@@ -7,16 +9,17 @@ namespace Carebook.UI.Components
     [ViewComponent(Name = "Footer")]
     public class FooterViewComponents : ViewComponent
     {
-        private readonly AppDbContext context;
+        private readonly IContactService _context;
 
-        public FooterViewComponents(AppDbContext context)
+        public FooterViewComponents(IContactService context)
         {
-            this.context = context;
+            _context = context;
         }
 
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            var model = context.Contacts.SingleOrDefault(q => q.Enabled);
+            var model = await _context.ContactList();
+            
             return View(model);
         }
     }

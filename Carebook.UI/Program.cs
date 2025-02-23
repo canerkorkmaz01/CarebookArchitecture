@@ -90,6 +90,7 @@ app.UseAuthorization();
 
 await DbInitializer.Initialize(app.Services, app.Configuration);
 
+
 app.MapAreaControllerRoute(
     name: "admin",
     areaName: "Admin",

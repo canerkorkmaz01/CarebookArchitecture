@@ -18,16 +18,17 @@ namespace Carebook.UI.Areas.Admin.Controllers
         public ContactController(IContactService contactService, IService<ContactViewModel> viewmodelService)
         {
             _contactService = contactService;
-            _viewmodelService = _viewmodelService;
+            _viewmodelService = viewmodelService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var contect = await _contactService.ContactList();
-            return View(contect);
+            var contact = await _contactService.ContactList();
+            return View(contact);
         }
 
-        public async Task<IActionResult>  Create()
+        [HttpGet]
+        public IActionResult  Create()
         {
             return View();
         }
@@ -37,23 +38,42 @@ namespace Carebook.UI.Areas.Admin.Controllers
         {
             contact.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             contact.DateCreated = DateTime.Now;
+
             try
             {
-                _viewmodelService.AddAsync(contact);    
+                await _viewmodelService.AddAsync(contact);    
                 TempData["success"] = $"{entityname} Adres Ekleme İşlemi Başarıyla Tamamlanmıştır";
                 return RedirectToAction("Index");
             }
-            catch (DbUpdateException)
+            catch (Exception ex)
             {
-                TempData["error"] = $"{entityname} Adres Ekleme İşlemi Hata Oluştu";
+                TempData["error"] = $"{entityname} Adres Ekleme İşlemi Hata Oluştu ";
                 return View(contact);
             }
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var contact = _viewmodelService.GetByIdAsync(id);
+            var contact = await _viewmodelService.GetByIdAsync(id);
             return View(contact);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ContactViewModel contact)
+        {
+            contact.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            contact.DateCreated = DateTime.Now;
+            try
+            {
+                await _viewmodelService.Update(contact);
+                TempData["success"] = $"{entityname} Adres Güncelleme İşlemi Başarıyla Tamamlanmıştır";
+                return RedirectToAction("Index");
+            }
+            catch (DbUpdateException)
+            {
+                TempData["error"] = $"{entityname} Adres Güncelleme İşlemi Hata Oluştu";
+                return View(contact);
+            }
         }
     }
 }
