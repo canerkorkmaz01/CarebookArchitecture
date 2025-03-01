@@ -54,7 +54,7 @@ namespace Carebook.Business.Services
             var car = await _carFeatureRepository.GetFeatureIdsByCarIdAsync(carId);
 
             if (car == null)
-                throw new Exception("Car not found");
+                throw new Exception("Araç Bulunamadı");
             return car.Features.Select(f => f.Id).ToList();
         }
     }

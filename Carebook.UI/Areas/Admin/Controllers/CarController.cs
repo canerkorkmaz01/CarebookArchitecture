@@ -28,7 +28,6 @@ namespace Carebook.UI.Areas.Admin.Controllers
         private readonly IFeatureService _featureList;
         private readonly ICarPictureService _carPictureService;
 
-
         public CarController(ICarPageListService carPageListService, ICarFeatureService carFeatureService,
             IService<FeatureViewModel> featureService, IService<CarViewModel> carService ,IFeatureService featureList, ICarPictureService carPictureService)
         {

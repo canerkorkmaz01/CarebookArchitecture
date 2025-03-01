@@ -15,6 +15,11 @@ namespace Carebook.DataAccess.Repositories
             _context = context;
         }
 
+        public async Task<Contact?> ContacGetListt()
+        {
+           return await _context.Contacts.SingleOrDefaultAsync(x=> x.Enabled);
+        }
+
         public async Task<IEnumerable<Contact>> ContactList()
         {
             return await _context.Contacts
