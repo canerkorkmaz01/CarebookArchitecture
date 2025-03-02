@@ -5,6 +5,8 @@ namespace Carebook.Business.Interfaces
 {
     public interface IPricingService
     {
-        Task<List<PricingViewModel>> GetPricingAsync();
+        Task<List<PricingViewModel>> GetAllPricingAsync();
+
+        Task<List<CarViewModel>> GetPricingAsync();
     }
 }

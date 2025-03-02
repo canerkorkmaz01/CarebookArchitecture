@@ -1,4 +1,5 @@
 ﻿using Carebook.Entities;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Carebook.Common.ViewModels

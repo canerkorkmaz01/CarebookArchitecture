@@ -1,5 +1,6 @@
 ﻿
 using Carebook.Entities;
+using System;
 
 namespace Carebook.Common.ViewModels
 {

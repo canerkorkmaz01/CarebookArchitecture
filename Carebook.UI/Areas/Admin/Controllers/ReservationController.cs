@@ -29,11 +29,11 @@ namespace Carebook.UI.Areas.Admin.Controllers
         {
             var model = await _reservationList.ReservationList();
             
-            foreach (var reservation in model)
-            {
-                Console.WriteLine($"CarName: {reservation.User.Name}");// sorun burada
-                Console.WriteLine($"CarName: {reservation.Cars.CarName}");
-            }
+            //foreach (var reservation in model)
+            //{
+            //    Console.WriteLine($"CarName: {reservation.User.Name}");// sorun burada
+            //    Console.WriteLine($"CarName: {reservation.Cars.CarName}");
+            //}
 
             return View(model);
         }
@@ -51,7 +51,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
         public async Task<IActionResult> Create(ReservationViewModel reservation)
         {
             reservation.DateCreated = DateTime.Now;
-            reservation.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            reservation.UserId = int.TryParse(User?.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int userId) ? userId : 0;
             try
             {
                 await _reservationService.AddAsync(reservation);
@@ -83,7 +83,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(ReservationViewModel reservation)
         {
-            reservation.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            reservation.UserId = int.TryParse(User?.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int userId) ? userId : 0;
             reservation.DateCreated = DateTime.Now;
        
             try
@@ -104,7 +104,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }

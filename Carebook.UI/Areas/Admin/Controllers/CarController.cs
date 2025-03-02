@@ -104,7 +104,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
                                 p.BackgroundColor(Color.White);
                                 var photo = new CarPictureViewModel
                                 {
-                                    UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value),
+                                    UserId = int.TryParse(User?.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int userId) ? userId : 0,
                                     DateCreated = DateTime.Now,
                                     Enabled = model.Enabled,
                                     Photo = image.ToBase64String(JpegFormat.Instance)
@@ -130,7 +130,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
             }
 
             model.DateCreated = DateTime.Now;
-            model.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            model.UserId = int.TryParse(User?.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int userId) ? userId : 0;
             try
             {
                 await _carService.AddAsync(model);  
@@ -152,7 +152,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             ViewBag.CarFeatures = await _carFeatureService.GetCarFeaturesAsync();
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
@@ -232,7 +232,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
                                 p.BackgroundColor(Color.White);
                                 var photo = new CarPictureViewModel
                                 {
-                                    UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value),
+                                    UserId = int.TryParse(User?.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int userId) ? userId : 0,
                                     DateCreated = DateTime.Now,
                                     Enabled = model.Enabled,
                                     Photo = image.ToBase64String(JpegFormat.Instance)
@@ -251,7 +251,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
                 }
 
             model.DateCreated = DateTime.Now;
-            model.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            model.UserId = int.TryParse(User?.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int userId) ? userId : 0;
             try
             {
                 await _carService.Update(model);
@@ -270,7 +270,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }

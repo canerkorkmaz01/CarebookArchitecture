@@ -39,7 +39,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
         public async Task<IActionResult> Create(FeatureViewModel carFeature)
         {
             carFeature.DateCreated = DateTime.Now;
-            carFeature.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            carFeature.UserId = int.TryParse(User?.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int userId) ? userId : 0;
             if (!ModelState.IsValid)
             {
                 TempData["error"] = "Geçersiz veri girdiniz.";
@@ -63,7 +63,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 NotFound();
             }
@@ -74,7 +74,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult>  Edit(FeatureViewModel carFeature)
         {
-            carFeature.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            carFeature.UserId = int.TryParse(User?.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int userId) ? userId : 0;
             try
             {
                 await _featureService.Update(carFeature);
@@ -91,7 +91,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
 
         public async Task <IActionResult> Delete(int id)
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }

@@ -26,7 +26,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var model = await _pricingRepository.GetPricingAsync();
+            var model = await _pricingRepository.GetAllPricingAsync();
             return View(model);
         }
 

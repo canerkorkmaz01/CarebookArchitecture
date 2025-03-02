@@ -13,6 +13,11 @@ namespace Carebook.DataAccess.Repositories
             _context = context;   
         }
 
+        public async Task<IEnumerable<Car>> GetReservationAsync()
+        {
+            return await _context.Cars.AsNoTracking().ToListAsync();
+        }
+
         public async Task<IEnumerable<Reservation>> GetReservationNameAsync()
         {
             return await _context.Reservations
@@ -20,5 +25,7 @@ namespace Carebook.DataAccess.Repositories
                 .Include(u=>u.User)
                 .OrderBy(x=>x.NameSurname).ToListAsync();
         }
+
+   
     }
 }

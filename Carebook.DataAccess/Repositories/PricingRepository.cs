@@ -14,13 +14,22 @@ namespace Carebook.DataAccess.Repositories
             _context = context;
         }
 
-        public async Task<List<Pricing>> GetPricingAsync()
+        public async Task<List<Pricing>> GetAllPricingAsync()
         {
             return await _context.Pricings
                 .Include(p => p.Cars)
                 .Include(p => p.User)
                 .OrderBy(p => p.Cars.CarName)
                 .AsNoTracking().ToListAsync();
+        }
+
+        public async Task<List<Car>> GetPricingAsync()
+        {
+            return await _context.Cars
+                .Include(p=>p.Pricings)
+                .OrderBy(x => x.CarName)
+                .AsNoTracking()
+                .ToListAsync();
         }
     }
 }

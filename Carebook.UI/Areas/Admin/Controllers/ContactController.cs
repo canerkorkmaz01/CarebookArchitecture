@@ -36,7 +36,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(ContactViewModel contact)
         {
-            contact.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            contact.UserId = int.TryParse(User?.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int userId) ? userId : 0;
             contact.DateCreated = DateTime.Now;
 
             try
@@ -45,7 +45,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
                 TempData["success"] = $"{entityname} Adres Ekleme İşlemi Başarıyla Tamamlanmıştır";
                 return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 TempData["error"] = $"{entityname} Adres Ekleme İşlemi Hata Oluştu ";
                 return View(contact);
@@ -61,7 +61,7 @@ namespace Carebook.UI.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(ContactViewModel contact)
         {
-            contact.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            contact.UserId = int.TryParse(User?.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int userId) ? userId : 0;
             contact.DateCreated = DateTime.Now;
             try
             {

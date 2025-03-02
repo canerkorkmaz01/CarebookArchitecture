@@ -15,6 +15,14 @@ namespace Carebook.Business.Services
             _contact = contact;
             _mapper = mapper;
         }
+
+        public async Task<ContactViewModel> ContacGetList()
+        {
+            var contact= await _contact.ContacGetListt();
+
+            return _mapper.Map<ContactViewModel>(contact);
+        }
+
         public async Task<IEnumerable<ContactViewModel>> ContactList()
         {
             var contect = await _contact.ContactList();

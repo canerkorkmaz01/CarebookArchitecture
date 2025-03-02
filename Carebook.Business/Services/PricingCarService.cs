@@ -2,7 +2,6 @@
 using Carebook.Business.Interfaces;
 using Carebook.Common.ViewModels;
 using Carebook.DataAccess.Interface;
-using Carebook.Entities;
 
 namespace Carebook.Business.Services
 {
@@ -17,12 +16,17 @@ namespace Carebook.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<List<PricingViewModel>> GetPricingAsync()
+        public async Task<List<PricingViewModel>> GetAllPricingAsync()
         {
-            var pricings = await _pricingRepository.GetPricingAsync();
+            var pricings = await _pricingRepository.GetAllPricingAsync();
             var viewModel = _mapper.Map<List<PricingViewModel>>(pricings);
             return viewModel;
         }
 
+        public async Task<List<CarViewModel>> GetPricingAsync()
+        {
+            var pricing = await _pricingRepository.GetPricingAsync();
+            return _mapper.Map<List<CarViewModel>>(pricing);
+        }
     }
 }

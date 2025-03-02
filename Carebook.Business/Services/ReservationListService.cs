@@ -16,10 +16,18 @@ namespace Carebook.Business.Services
             _mapper = mapper;
         }
 
+        public async Task<IEnumerable<CarViewModel>> ReservationCarList()
+        {
+            var reservationcar = await _reservationRepository.GetReservationAsync();
+     
+            return _mapper.Map<IEnumerable<CarViewModel>>(reservationcar);
+
+        }
+
         public async Task<IEnumerable<ReservationViewModel>> ReservationList()
         {
             var reservation = await _reservationRepository.GetReservationNameAsync();
-
+            
             return _mapper.Map<IEnumerable<ReservationViewModel>>(reservation);  
         }
     }

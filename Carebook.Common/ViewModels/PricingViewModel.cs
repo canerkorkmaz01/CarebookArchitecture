@@ -1,6 +1,7 @@
 ﻿
 
 using Carebook.Entities;
+using System;
 using System.Web.Mvc;
 
 namespace Carebook.Common.ViewModels

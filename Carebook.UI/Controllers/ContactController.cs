@@ -1,12 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Carebook.Business.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Carebook.UI.Controllers
 {
     public class ContactController : Controller
     {
-        public IActionResult Index()
+        private readonly IContactService _contactService;
+
+        public ContactController(IContactService contactService)
         {
-            return View();
+            _contactService = contactService;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var contact = await _contactService.ContacGetList();
+            return View(contact);
         }
     }
 }

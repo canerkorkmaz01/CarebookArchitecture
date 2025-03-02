@@ -1,5 +1,6 @@
 ﻿using Carebook.Common.Enums;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace Carebook.Common.ViewModels
 {

@@ -1,6 +1,8 @@
 ﻿using Carebook.Common.Enums;
 using Carebook.Entities;
 using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
 
 namespace Carebook.Common.ViewModels
 {
@@ -25,13 +27,13 @@ namespace Carebook.Common.ViewModels
 
         public Licence Licence { get; set; }
 
-        public string? Plate { get; set; }
+        public string Plate { get; set; }
 
         public int[]? PicturesToDeleted { get; set; }
 
-        public string? Photo { get; set; }
+        public string Photo { get; set; }
 
-        public int[]? SelectedFeatures { get; set; }
+        public int[] SelectedFeatures { get; set; }
 
         public IFormFile PhotoFile { get; set; }
 
