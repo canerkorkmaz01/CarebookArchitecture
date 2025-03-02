@@ -6,29 +6,17 @@ namespace Carebook.UI.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IService<CarViewModel> _carService;
         private readonly ICarService _carServices;
 
-        public HomeController(IService<CarViewModel> carService, ICarService carServices)
+        public HomeController( ICarService carServices)
         {
-            _carService = carService;
             _carServices = carServices;
         }
 
         public async Task<IActionResult> Index()
         {
-            //var model = await _carServices.GetCarsAsync(a => a.CarName,query => query.OrderBy(carName => carName)); 
-            //return View(model);
-
-            var model = await _carServices.GetCarsAsync(
-               car => new CarViewModel
-               {
-                   CarName = car.CarName,
-                   Photo = car.Photo
-               },
-               query => query.OrderBy(carViewModel => carViewModel.CarName));
-
-            return View(model);
+           var car = await _carServices.GetCarHomeList();     
+            return View(car);
         }
 
         public IActionResult About()

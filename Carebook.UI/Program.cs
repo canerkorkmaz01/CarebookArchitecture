@@ -48,7 +48,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAutoMapper(typeof(MappingProfile));
-builder.Services.AddScoped<ICarService, CarService>();
+builder.Services.AddScoped<ICarService, CarHomeListService>();
+builder.Services.AddScoped<ICarHomeRepository, CarHomeRepository>();
 builder.Services.AddScoped<ICarFeatureRepository, CarFeatureRepository>();
 builder.Services.AddScoped<ICarFeatureService, CarFeatureService>();
 builder.Services.AddScoped<ICarPageListRepository, CarPageListRepository>();
