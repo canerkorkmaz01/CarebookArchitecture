@@ -9,6 +9,6 @@ namespace Carebook.Business.Interfaces
 {
     public interface ICarPictureService
     {
-        Task <List<CarPictureViewModel>> CarPictureAsync(int id);
+        Task <IEnumerable<CarPictureViewModel>> CarPictureAsync(int id);
     }
 }

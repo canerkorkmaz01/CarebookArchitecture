@@ -16,7 +16,7 @@ namespace Carebook.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<List<CarPictureViewModel>> CarPictureAsync(int id)
+        public async Task<IEnumerable<CarPictureViewModel>> CarPictureAsync(int id)
         {
             var carPictures = await _carPictureService.CarPictureAsync(id);
             return _mapper.Map<List<CarPictureViewModel>>(carPictures);

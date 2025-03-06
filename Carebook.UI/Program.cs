@@ -69,7 +69,7 @@ builder.Services.AddScoped<IContactRepository, ContactListRepository>();
 builder.Services.AddScoped<IContactService, ContactListService>();
 
 builder.Services.AddScoped<IService<PricingViewModel>, PricingService>();
-builder.Services.AddScoped<ICarDropdownList, CarDropdownList>();
+builder.Services.AddScoped<ICarDropdownListRepository, CarDropdownListRepository>();
 builder.Services.AddScoped<ICarDropdownListService, CarDropdownListService>();
 builder.Services.AddScoped<IPricingRepository, PricingRepository>();
 builder.Services.AddScoped<IPricingService, PricingCarService>();
@@ -106,95 +106,4 @@ app.Run();
 
 
 
-#region
-//var builder = WebApplication.CreateBuilder(args);
 
-
-//// Add services to the container.
-//builder.Services.AddControllersWithViews();
-//builder.Services.Configure<MvcOptions>(options =>
-//{
-//    options.ModelValidatorProviders.Clear(); 
-//});
-//builder.Services.AddDependencies(builder.Configuration);
-
-//builder.Services.AddIdentity<UserViewModel, IdentityRole<int>>()
-//    .AddEntityFrameworkStores<AppDbContext>()
-//    .AddDefaultTokenProviders();
-
-//builder.Services.AddScoped<IUserListRepository, UserListRepository>();
-//builder.Services.AddScoped<IUserListService, UserListService>();
-
-//builder.Services.AddDbContext<AppDbContext>(options =>
-//    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"))
-//           .UseLazyLoadingProxies(false));
-
-
-
-//builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-//builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-//builder.Services.AddAutoMapper(typeof(MappingProfile));
-//builder.Services.AddScoped<ICarService, CarService>();
-//builder.Services.AddScoped<ICarFeatureRepository, CarFeatureRepository>();
-//builder.Services.AddScoped<ICarFeatureService, CarFeatureService>();
-//builder.Services.AddScoped<ICarPageListRepository, CarPageListRepository>();
-//builder.Services.AddScoped<ICarPageListService, CarPageListService>();
-//builder.Services.AddScoped<IService<FeatureViewModel>, FeatureService>();
-//builder.Services.AddScoped<IFeatureService, FeatureNameService>();
-//builder.Services.AddScoped<IFeatureRepository, FeatureRepository>();
-//builder.Services.AddScoped<ICarPictureRepository, CarPictureRepository>();
-//builder.Services.AddScoped<ICarPictureService, CarPictureAsyncService>();
-
-//builder.Services.AddScoped<IService<ReservationViewModel>, ReservationService>();
-//builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
-//builder.Services.AddScoped<IReservationService, ReservationListService>();
-
-////builder.Services.AddScoped<IUserListRepository, UserListRepository>();
-////builder.Services.AddScoped<IUserListService, UserListService>();
-
-
-
-//builder.Services.AddScoped<IService<PricingViewModel>, PricingService>();
-//builder.Services.AddScoped<ICarDropdownList, CarDropdownList>();
-//builder.Services.AddScoped<ICarDropdownListService, CarDropdownListService>();
-//builder.Services.AddScoped<IPricingRepository, PricingRepository>();
-//builder.Services.AddScoped<IPricingService, PricingCarService>();
-
-
-//var app = builder.Build();
-
-
-//// Configure the HTTP request pipeline.
-//if (!app.Environment.IsDevelopment())
-//{
-//    app.UseExceptionHandler("/Home/Error");
-//    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-//    app.UseHsts();
-//}
-
-//app.UseHttpsRedirection();
-//app.UseStaticFiles();
-
-//app.UseRouting();
-//app.UseAuthentication();
-//app.UseAuthorization();
-
-//await DbInitializer.Initialize(app.Services, app.Configuration);
-
-//app.MapAreaControllerRoute(
-//    name: "admin",
-//    areaName: "Admin",
-//    pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}");
-
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-////app.MapAreaControllerRoute(
-////    name: "user",
-////    areaName: "User",
-////    pattern: "User/{controller=Account}/{action=Login}/{id?}");
-
-//app.Run();
-
-#endregion

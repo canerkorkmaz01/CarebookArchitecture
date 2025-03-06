@@ -15,12 +15,12 @@ namespace Carebook.DataAccess.Repositories
             _context = context;
         }
 
-        public async Task<List<Feature>> GetAllAsync()
+        public async Task<IEnumerable<Feature>> GetAllAsync()
         {
             return await _context.Features.AsNoTracking().ToListAsync();
         }
 
-        public async Task<List<Feature>> GetAllNameAsync()
+        public async Task<IEnumerable<Feature>> GetAllNameAsync()
         {
             return await _context.Features
                  .Include(f => f.User)

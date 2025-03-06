@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Carebook.DataAccess.Interface
 {
-    public interface IContactAddress
+    public interface IContactAddressRepository
     {
          Contact Contact { get; }
     }

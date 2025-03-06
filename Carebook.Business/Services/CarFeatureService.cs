@@ -16,7 +16,7 @@ namespace Carebook.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<List<SelectListItem>> GetCarFeaturesAsync()
+        public async Task<IEnumerable<SelectListItem>> GetCarFeaturesAsync()
         {
             var features = await _carFeatureRepository.GetCarFeaturesAsync();
 
@@ -29,7 +29,7 @@ namespace Carebook.Business.Services
             return selectListItems;
         }
 
-        public async Task<List<SelectListItem>> GetEditCarFeaturesAsync()
+        public async Task<IEnumerable<SelectListItem>> GetEditCarFeaturesAsync()
         {
             var features = await _carFeatureRepository.GetEditCarFeaturesAsync();
 
@@ -49,7 +49,7 @@ namespace Carebook.Business.Services
             await _carFeatureRepository.GetFeatureById(id);
         }
 
-        public async Task<List<int>> GetCarFeatureIdsAsync(int carId)
+        public async Task<IEnumerable<int>> GetCarFeatureIdsAsync(int carId)
         {
             var car = await _carFeatureRepository.GetFeatureIdsByCarIdAsync(carId);
 

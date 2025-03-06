@@ -13,12 +13,12 @@ namespace Carebook.DataAccess.Repositories
             _context = context;
         }
 
-        public async Task<List<Feature>> GetCarFeaturesAsync()
+        public async Task<IEnumerable<Feature>> GetCarFeaturesAsync()
         {
             return await _context.Features.OrderBy(f => f.Name).ToListAsync();
         }
 
-        public async Task<List<Feature>> GetEditCarFeaturesAsync()
+        public async Task<IEnumerable<Feature>> GetEditCarFeaturesAsync()
         {
            return await _context.Features.ToListAsync();
            

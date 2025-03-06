@@ -3,7 +3,6 @@ using Carebook.Common.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace Carebook.UI.Controllers
 {
@@ -24,29 +23,30 @@ namespace Carebook.UI.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Create(int id)
+        public async Task<IActionResult> Create(int reservationid)
         {
             var reservation = await _reservationList.ReservationCarList();
-            ViewBag.Reservation = new SelectList(reservation, "Id", "CarName");
-            ViewBag.GearType = new SelectList(reservation, "Id", "GearType");
-            ViewBag.FuelType = new SelectList(reservation, "Id", "FuelType");
-            ViewBag.Photo = reservation.FirstOrDefault()?.Photo;
+            var reservationCar =reservation.Where(c => c.Id == reservationid).ToList();
+
+            ViewBag.Reservation = new SelectList(reservationCar, "Id", "CarName");
+            ViewBag.GearType = new SelectList(reservationCar, "Id", "GearType");
+            ViewBag.FuelType = new SelectList(reservationCar, "Id", "FuelType");
+            ViewBag.Photo = reservationCar.FirstOrDefault()?.Photo;
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Create(ReservationViewModel reservation)
         {
             reservation.DateCreated = DateTime.Now;
-            reservation.UserId = int.TryParse(User?.FindFirst(ClaimTypes.NameIdentifier)?.Value, out int userId) ? userId : 0;
+            reservation.UserId = 1;
             try
             {
                 await _reservationService.AddAsync(reservation);
-                TempData["success"] = $"{entityName} Ekleme işlemi başarıyla tamamlanmıştır";
-                return RedirectToAction("Index");
+                return View();
+                //return RedirectToAction("Index");
             }
             catch (DbUpdateException)
-            {
-                TempData["error"] = $"{entityName} Ekleme işleminde Hata Oluştu";
+            { 
                 return View(reservation);
             }
         }

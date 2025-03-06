@@ -10,9 +10,9 @@ namespace Carebook.Business.Interfaces
 {
     public interface IFeatureService
     {
-        Task <List<FeatureViewModel>>GetAllNameFeatures();
+        Task<IEnumerable<FeatureViewModel>>GetAllNameFeatures();
 
-        Task<List<FeatureViewModel>> GetAllAsync();
+        Task<IEnumerable<FeatureViewModel>> GetAllAsync();
 
     }
 }

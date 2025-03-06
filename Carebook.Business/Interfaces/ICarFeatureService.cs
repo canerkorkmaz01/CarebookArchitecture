@@ -4,11 +4,11 @@ namespace Carebook.Business.Interfaces
 {
     public interface ICarFeatureService
     {
-        Task<List<SelectListItem>> GetEditCarFeaturesAsync();
-        Task<List<SelectListItem>> GetCarFeaturesAsync();
+        Task<IEnumerable<SelectListItem>> GetEditCarFeaturesAsync();
+        Task<IEnumerable<SelectListItem>> GetCarFeaturesAsync();
 
         Task GetFeatureById (int id);
 
-        Task<List<int>> GetCarFeatureIdsAsync(int carId);
+        Task<IEnumerable<int>> GetCarFeatureIdsAsync(int carId);
     }
 }

@@ -16,14 +16,14 @@ namespace Carebook.Business.Services
             _mapper = mapper;
         }
 
-        public async Task<List<PricingViewModel>> GetAllPricingAsync()
+        public async Task<IEnumerable<PricingViewModel>> GetAllPricingAsync()
         {
             var pricings = await _pricingRepository.GetAllPricingAsync();
             var viewModel = _mapper.Map<List<PricingViewModel>>(pricings);
             return viewModel;
         }
 
-        public async Task<List<CarViewModel>> GetPricingAsync()
+        public async Task<IEnumerable<CarViewModel>> GetPricingAsync()
         {
             var pricing = await _pricingRepository.GetPricingAsync();
             return _mapper.Map<List<CarViewModel>>(pricing);

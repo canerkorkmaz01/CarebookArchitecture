@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Carebook.Common.ViewModels;
 using Carebook.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 
@@ -10,8 +11,8 @@ namespace Carebook.Business.Profiles
     {
         public MappingProfile()
         {
-           
-           
+         
+
             CreateMap<UserViewModel, User>().ReverseMap();
             CreateMap<ContactViewModel, Contact>().ReverseMap();
             CreateMap<Pricing, PricingViewModel>().ReverseMap();

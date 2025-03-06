@@ -5,7 +5,7 @@ namespace Carebook.DataAccess.Interface
 {
     public interface IFeatureRepository
     {
-        Task<List<Feature>> GetAllAsync();
-        Task<List<Feature>> GetAllNameAsync();
+        Task<IEnumerable<Feature>> GetAllAsync();
+        Task<IEnumerable<Feature>> GetAllNameAsync();
     }
 }

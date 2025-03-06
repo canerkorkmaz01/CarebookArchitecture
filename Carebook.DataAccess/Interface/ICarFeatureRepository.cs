@@ -5,9 +5,9 @@ namespace Carebook.DataAccess.Interface
 {
     public interface ICarFeatureRepository
     {
-        Task<List<Feature>> GetEditCarFeaturesAsync();
+        Task<IEnumerable<Feature>> GetEditCarFeaturesAsync();
 
-        Task<List<Feature>> GetCarFeaturesAsync();
+        Task<IEnumerable<Feature>> GetCarFeaturesAsync();
 
         Task GetFeatureById(int id);
         Task<Car> GetFeatureIdsByCarIdAsync(int carId);

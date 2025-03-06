@@ -73,7 +73,8 @@
                                             @*<span class="cat">Cheverolet</span>*@
                                             <p class="price ml-auto">@(carList.Pricings?.DailyWages.ToString("TL") ?? "0 TL") <span>/Günlük</span></p>
                                         </div>
-                                        <p class="d-flex mb-0 d-block"><a asp-controller="Reservation" asp-action="Create" asp-route-reservationid="@carList.Id" class="btn btn-primary py-2 mr-1">Şimdi Ayırtın</a> <a asp-controller="Car" asp-action="CarDetails" asp-route-id="@carList.Id" class="btn btn-secondary py-2 ml-1">Detaylar</a></p>
+                                        <p class="d-flex mb-0 d-block"><a asp-controller="Reservation" asp-action="Create" asp-route-reservationid="@carList.Id" class="btn btn-primary py-2 mr-1">Şimdi Ayırtın</a>
+                                            <a asp-controller="Car" asp-action="CarDetails" asp-route-id="@carList.Id" class="btn btn-secondary py-2 ml-1">Detaylar</a></p>
 
                                     </div>
                                 </div>

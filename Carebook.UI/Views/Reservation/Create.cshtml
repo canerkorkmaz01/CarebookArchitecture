@@ -17,8 +17,8 @@
 </section>
 
 *<div class="mt-2 container">
-    @*<form method="post" >*@
-    @*<form id="reservationForm" novalidate class="needs-validation">*@
+   @*  <form method="post" enctype="multipart/form-data"> *@
+   
 
     @if (!ViewContext.ModelState.IsValid)
     {
@@ -91,11 +91,11 @@
         </div>
 
     </div>
-    <button type="submit" class="btn btn-primary" id="btnAdd">
+    <button type="submit" class="btn btn-primary" id="btnAdd" >
         <i class="fa fa-save"></i> Rezervasyon Yap
     </button>
     <a class="btn btn-link" asp-controller="Home" asp-action="Index">İptal</a>
-    @*</form>*@
+    @* </form> *@
 </div>
 
 <section class="ftco-section bg-light mt-3">
@@ -150,23 +150,23 @@
                         })
                     },
 
-                    error: function (response) {
-                        /*  alert(response.responseText);*/
-                        Swal.fire({
-                            title: 'Rezervasyon',
-                            text: "İşlem Başarısız Oldu Devam Etmek İçin Tamam Butonuna Basınız!",
-                            icon: 'error',
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Tamam'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                Swal.fire(
-                                    window.history.back()
-                                )
-                            }
-                        })
-                    }
+                    // error: function (response) {
+                    //     /*  alert(response.responseText);*/
+                    //     Swal.fire({
+                    //         title: 'Rezervasyon',
+                    //         text: "İşlem Başarısız Oldu Devam Etmek İçin Tamam Butonuna Basınız!",
+                    //         icon: 'error',
+                    //         confirmButtonColor: '#3085d6',
+                    //         cancelButtonColor: '#d33',
+                    //         confirmButtonText: 'Tamam'
+                    //     }).then((result) => {
+                    //         if (result.isConfirmed) {
+                    //             Swal.fire(
+                    //                 window.history.back()
+                    //             )
+                    //         }
+                    //     })
+                    // }
                 });
 
             });

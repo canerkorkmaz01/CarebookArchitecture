@@ -14,7 +14,7 @@ namespace Carebook.DataAccess.Repositories
             _context = context;
         }
 
-        public async Task<List<Pricing>> GetAllPricingAsync()
+        public async Task<IEnumerable<Pricing>> GetAllPricingAsync()
         {
             return await _context.Pricings
                 .Include(p => p.Cars)
@@ -23,7 +23,7 @@ namespace Carebook.DataAccess.Repositories
                 .AsNoTracking().ToListAsync();
         }
 
-        public async Task<List<Car>> GetPricingAsync()
+        public async Task<IEnumerable<Car>> GetPricingAsync()
         {
             return await _context.Cars
                 .Include(p=>p.Pricings)

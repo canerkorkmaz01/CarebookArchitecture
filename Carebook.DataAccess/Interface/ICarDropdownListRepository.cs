@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Carebook.DataAccess.Interface
 {
-    public interface ICarDropdownList
+    public interface ICarDropdownListRepository
     {
-        Task<List<Car>> GetCarDropdownListAsync();
+        Task<IEnumerable<Car>> GetCarDropdownListAsync();
     }
 }

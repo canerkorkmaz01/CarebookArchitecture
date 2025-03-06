@@ -6,16 +6,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Carebook.DataAccess.Repositories
 {
-    public class CarDropdownList : ICarDropdownList
+    public class CarDropdownListRepository : ICarDropdownListRepository
     {
         private readonly AppDbContext _context;
 
-        public CarDropdownList(AppDbContext context)
+        public CarDropdownListRepository(AppDbContext context)
         {
             _context = context;
         }
 
-        public async Task<List<Car>> GetCarDropdownListAsync()
+        public async Task<IEnumerable<Car>> GetCarDropdownListAsync()
         {
             return  await _context.Cars.OrderBy(p => p.CarName).ToListAsync();
         }

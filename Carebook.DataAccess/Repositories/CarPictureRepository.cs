@@ -14,7 +14,7 @@ namespace Carebook.DataAccess.Repositories
             _context = context;
         }
 
-        public async Task<List<CarPicture>> CarPictureAsync(int id)
+        public async Task<IEnumerable<CarPicture>> CarPictureAsync(int id)
         {
            return await _context.CarPictures.Where(q => q.CarId == id).ToListAsync();
         }

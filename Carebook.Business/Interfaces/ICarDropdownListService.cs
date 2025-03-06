@@ -5,6 +5,6 @@ namespace Carebook.Business.Interfaces
 {
     public interface ICarDropdownListService
     {
-        Task<List<CarViewModel>> GetCarDropdownlist();
+        Task<IEnumerable<CarViewModel>> GetCarDropdownlist();
     }
 }

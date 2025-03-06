@@ -5,8 +5,8 @@ namespace Carebook.DataAccess.Interface
 {
     public interface IPricingRepository
     {
-        Task<List<Pricing>> GetAllPricingAsync();
+        Task<IEnumerable<Pricing>> GetAllPricingAsync();
 
-        Task<List<Car>> GetPricingAsync();
+        Task<IEnumerable<Car>> GetPricingAsync();
     }
 }
