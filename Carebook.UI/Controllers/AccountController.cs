@@ -27,6 +27,7 @@ namespace Carebook.UI.Controllers
 
       
         [HttpPost]
+        [Route("Register")]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
 
