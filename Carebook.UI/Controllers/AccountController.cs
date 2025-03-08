@@ -1,11 +1,11 @@
 ﻿using Carebook.Business.Interfaces;
-using Carebook.Business.ValidationRules;
 using Carebook.Common.ViewModels;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Carebook.UI.Controllers
 {
+    
     public class AccountController : Controller
     {
 
@@ -19,12 +19,13 @@ namespace Carebook.UI.Controllers
         }
 
         [HttpGet]
+        [Route("Register")]
         public IActionResult Register()
         {
             return View();
         }
 
-
+      
         [HttpPost]
         public async Task<IActionResult> Register(RegisterViewModel model)
         {
