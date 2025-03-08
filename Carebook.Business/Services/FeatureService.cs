@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
-using AutoMapper.Features;
 using Carebook.Business.Interfaces;
 using Carebook.Common.ViewModels;
 using Carebook.DataAccess.Interface;
-using Carebook.DataAccess.UnitOfWork;
 using Carebook.Entities;
 using System.Linq.Expressions;
 

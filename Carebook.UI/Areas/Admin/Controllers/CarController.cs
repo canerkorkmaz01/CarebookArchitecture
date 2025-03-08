@@ -16,7 +16,7 @@ using Size = SixLabors.ImageSharp.Size;
 namespace Carebook.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrators")]
     public class CarController : Controller
     {
         private const string entityName = "Araç Ekleme";
@@ -41,7 +41,6 @@ namespace Carebook.UI.Areas.Admin.Controllers
 
         public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
         {
-            // Service üzerinden veriyi alıyoruz
             var model = await _carPageListService.GetPagedCarsAsync(page, pageSize);
             return View(model);
         }

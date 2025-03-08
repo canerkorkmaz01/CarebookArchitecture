@@ -9,7 +9,7 @@ using System.Security.Claims;
 namespace Carebook.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrators")]
     public class PricingController : Controller
     {
         private const string entityName = "Araç Fiyatlandırma";

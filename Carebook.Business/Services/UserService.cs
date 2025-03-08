@@ -25,12 +25,6 @@ namespace Carebook.Business.Services
         {
             return _userManager.Users.FirstOrDefault(u => u.Email == email);
         }
-
-        //public User GetUserByNamePssswordl(string name, string pass)
-        //{
-        //    return _userManager.Users.Where(x=>x.Name == name ):
-        //}
-
        
         public async Task<(SignInResult result, string errorMessage)> LoginUserAsync(LoginViewModel model)
         {
@@ -86,7 +80,6 @@ namespace Carebook.Business.Services
 
                 if (!createRoleResult.Succeeded)
                 {
-                    // Eğer rol oluşturulamadıysa hatayı döndür
                     return IdentityResult.Failed(new IdentityError { Description = "Staff rolü oluşturulamadı." });
                 }
             }

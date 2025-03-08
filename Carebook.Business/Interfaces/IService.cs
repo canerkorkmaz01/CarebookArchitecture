@@ -1,5 +1,4 @@
-﻿using Carebook.Entities;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace Carebook.Business.Interfaces
 {

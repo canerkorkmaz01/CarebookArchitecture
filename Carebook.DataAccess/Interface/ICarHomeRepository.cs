@@ -1,5 +1,4 @@
-﻿using Carebook.Common.ViewModels;
-using Carebook.Entities;
+﻿using Carebook.Entities;
 
 namespace Carebook.DataAccess.Interface
 {

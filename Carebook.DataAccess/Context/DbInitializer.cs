@@ -51,14 +51,14 @@ namespace Carebook.DataAccess.Context
                 {
                     UserName = adminUserName,
                     Email = adminEmail,
-                    Name = "Admin" // Name sütununa bir değer atanıyor
+                    Name = "Administrators" // Name sütununa bir değer atanıyor
                 };
 
                 var result = await userManager.CreateAsync(adminUser, adminPassword);
 
                 if (result.Succeeded)
                 {
-                    await userManager.AddToRoleAsync(adminUser, "Admin");
+                    await userManager.AddToRoleAsync(adminUser, "Administrators");
                 }
             }
         }

@@ -3,12 +3,11 @@ using Carebook.Business.Interfaces;
 using Carebook.Common.ViewModels;
 using Carebook.DataAccess.Interface;
 using Carebook.Entities;
-using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace Carebook.Business.Services
 {
-    public class CarService : IService<CarViewModel>/*,ICarService*/
+    public class CarService : IService<CarViewModel>
     {
 
        private readonly IRepository<Car> _carRepository;
@@ -59,16 +58,6 @@ namespace Carebook.Business.Services
             var car = await _carRepository.GetByIdAsync(id, asNoTracking);
             return _mapper.Map<CarViewModel>(car); 
         }
-        //---------------------------------------------------------------------------------------------------------------------------------------------------
-        //public async Task<IEnumerable<TResult>> GetCarsAsync<TResult>(Expression<Func<Car, TResult>> selector,Func<IQueryable<TResult>, IOrderedQueryable<TResult>> orderBy = null)
-        //{
-        //    var query = _carRepository.GetQuery().Select(selector);
-
-        //    if (orderBy != null) query = orderBy(query);
-
-
-        //    return await query.ToListAsync();
-        //}
 
         public async Task<IEnumerable<CarViewModel>> GetPagedResponseAsync(int pageNumber, int pageSize, bool asNoTracking = true)
         {

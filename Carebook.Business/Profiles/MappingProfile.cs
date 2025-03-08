@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using Carebook.Common.ViewModels;
 using Carebook.Entities;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 

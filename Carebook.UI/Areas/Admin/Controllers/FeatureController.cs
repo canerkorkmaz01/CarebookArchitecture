@@ -8,7 +8,7 @@ using System.Security.Claims;
 namespace Carebook.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Administrators")]
     public class FeatureController : Controller
     {
 

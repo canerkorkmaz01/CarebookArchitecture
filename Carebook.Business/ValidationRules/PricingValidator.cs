@@ -1,5 +1,4 @@
 ﻿using Carebook.Common.ViewModels;
-using Carebook.Entities;
 using FluentValidation;
 
 namespace Carebook.Business.ValidationRules

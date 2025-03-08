@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Carebook.UI.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin,Staff")]
+    [Authorize(Roles = "Administrators,Staff")]
     public class DashboardController : Controller
     {
         public IActionResult Index()
