@@ -1,0 +1,6 @@
+@Carebook.API_HostAddress = http://localhost:5293
+
+GET {{Carebook.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
