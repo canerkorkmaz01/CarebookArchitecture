@@ -1,0 +1,143 @@
+﻿@using Carebook.Business.Extensions
+@using PagedList
+
+
+@model IEnumerable<CarViewModel>
+@{
+    ViewData["Title"] = "Araç Listele";
+}
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Araç Listesi</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive " style="width:100%">
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-controller="Car" asp-action="Create" class="btn btn-info mt-2 mb-2 "> <span class=" fas fa-plus"></span> Araç Ekle</a>
+            }
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="text-nowrap">
+                            Araç Fotosu
+                        </th>
+                        <th class="text-nowrap">
+                            Araç İsmi
+                        </th>
+                        <th class="text-nowrap">
+                            Araç Yılı
+                        </th>
+                        <th class="text-nowrap">
+                            Kasa Tipi
+                        </th>
+                        <th class="text-nowrap">
+                            Yakıt Tipi
+                        </th>
+                        <th class="text-nowrap">
+                            Vites Türü
+                        </th>
+                        <th class="text-nowrap">
+                            Kilometre
+                        </th>
+                        <th class="text-nowrap">
+                            Koltuk Sayısı
+                        </th>
+                        <th class="text-nowrap">
+                            Valiz Sayısı
+                        </th>
+                        <th class="text-nowrap">
+                            Ehliyet
+                        </th>
+
+                        <th class="text-nowrap">
+                            Araç Plakası
+                        </th>
+                        <th>
+                            Durum
+                        </th>
+                        <th>
+                            İşlem
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var cars in Model)
+                    {
+                        <tr>
+                            <td class="text-nowrap">
+                                <img src="@cars.Photo" height="60" />
+                            </td>
+                            <td class="text-nowrap">
+                                @cars.CarName
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.Year
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.Safe
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.FuelType
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.GearType
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.Kilometer
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.Armchair
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.SuitCase
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.Licence
+                            </td>
+                            <td class="text-nowrap" align="center">
+                                @cars.Plate
+                            </td>
+
+                            <td class="project-state">
+                                @if (cars.Enabled == true)
+                                {
+                                    <span class="badge badge-success">Aktif</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-danger">Pasif</span>
+                                }
+                            </td>
+                            <td class="d-flex justify-content-center">
+                                <partial name="RowButtonsPartial" model="@cars" />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="py-2 d-flex justify-content-center">
+                @Html.PagedListPager(
+                         Model as X.PagedList.IPagedList,
+                         page => Url.Action("Index", new { page, pageSize = ViewContext.HttpContext.Request.Query["pageSize"] }),
+                         Extensions.PagedListPagerOptions
+                         )
+            </div>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>

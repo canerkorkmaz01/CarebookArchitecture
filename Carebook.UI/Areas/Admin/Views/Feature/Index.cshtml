@@ -1,0 +1,85 @@
+﻿@model IEnumerable<FeatureViewModel>
+@{
+    ViewData["title"] = "Araç Özellikleri";
+ }
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Araç Özellikleri</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="table-responsive " style="width:100%;">
+            <a asp-controller="Feature" asp-action="Create" class="btn btn-info mt-2 mb-2 ml-2 "> <span class=" fas fa-plus"></span> Ekle</a>
+            <table class="table" style="width:100%;">
+
+                <thead>
+                    <tr>
+                        <th>
+                            Özellik Adı
+                        </th>
+                        <th>
+                            Kayıt Tarihi
+                        </th>
+                        <th>
+                            Kaydı Yapan
+                        </th>
+                        <th>
+                            Durum
+                        </th>
+                        <th class="d-flex justify-content-center">
+                            İşlemler
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var feature in Model)
+                    {
+                        <tr>
+                            <td class="project-state" align="left">
+                                @feature.Name
+                            </td>
+                            <td class="project-state" align="left">
+                                @feature.DateCreated
+                            </td>
+                            <td class="project-state" align="left">
+                                @feature.User.Name
+                            </td>
+                            @if (feature.Enabled)
+                            {
+                                <td class="project-state" align="left">
+                                    <span class="badge badge-success sp">Var</span>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="project-state" align="left">
+                                    <span class="badge badge-danger">Yok</span>
+                                </td>
+                            }
+                            <td class="d-flex justify-content-center">
+                                <partial name="RowButtonsPartial" model="@feature" />
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+
+@section Scripts {
+
+}
